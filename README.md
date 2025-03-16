@@ -54,9 +54,10 @@ void H(){
   _va_end_ : **dọn dẹp , giải phóng tài nguyên**
 
 *ví dụ: viết hàm tính tổng cho số nguyên*
->#include<stdio.h>
->#include<stdarg.h>
->int tong(int dem,...){
+```c
+#include<stdio.h>
+#include<stdarg.h>
+int tong(int dem,...){
      int total=0;
      va_list ap;
      va_start (ap,dem);
@@ -66,10 +67,11 @@ void H(){
      va_end(ap);
      return total;
 }
->int main(){
+int main(){
      printf("tổng các số sau %d\n",tong(5,6,4));
      return 0;
 }
+```
 -***Assert***:dùng để kiểm tra điều kiện phải xảy ra trong quá trình run , nếu đúng điều kiện thì chương trình tiếp tục run , nếu sai thì chương trình sẽ dừng lại 
 _ví dụ:viết 1 chương trình sử dụng assert_
 >#include<assert.h>
