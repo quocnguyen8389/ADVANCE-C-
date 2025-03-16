@@ -1,5 +1,6 @@
  # COMPILER - PREPROCESS -MACRO
 - Quy trình biên dịch :
+
 _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo file.i (intermediate)_
 >gcc -E main.c -o main.i
     
@@ -12,10 +13,10 @@ _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo f
 _Liên kết : tạo file thực thi bằng cách kết hợp các file.o_
 >gcc main.o -o main
 
-- the preprocess
+- the preprocess :
 _include_
 *define*
-- Macro
+- Macro :
  *ifdef*
  *ifndef*
  *endif*
@@ -34,6 +35,7 @@ int main()
 }
 ```
 ***Ý nghĩa :học cách sử dụng define và lưu ý khi sử dụng 2 giá trị thì tối ưu hóa chúng bằng dấu ngoặc đơn từng giá trị tránh việc ưu tiên toán tử làm sai kết quả***
+
 *ví dụ: hãy viết 1 chương trình sử dụng #ifndef và giải thích tại sao sử dụng ?*
 ```c
 #ifndef MY_HEADER_H  
@@ -49,10 +51,10 @@ void H(){
 ## STDART - ASSERT
 - Stdart là một thư viện có các hàm điển hình như printf và scanf
 - cơ chế 
-  _va_list_: **tạo biến** 
-  _va_start_:**khởi tạo** liên kết với _va_list_ với tham số cố định :*ví dụ : va_start(ap ,format);*
-  _va_arg_:**truy xuất tham số, phải chỉ định kiểu dữ liệu**
-  _va_end_ : **dọn dẹp , giải phóng tài nguyên**
+_va_list_: **tạo biến**  
+_va_start_:**khởi tạo** liên kết với _va_list_ với tham số cố định :*ví dụ : va_start(ap ,format);*
+_va_arg_:**truy xuất tham số, phải chỉ định kiểu dữ liệu**
+_va_end_ : **dọn dẹp , giải phóng tài nguyên**
 
 *ví dụ: viết hàm tính tổng cho số nguyên*
 ```c
@@ -87,12 +89,12 @@ void chia(int a , int b){
 ### BITMASK 
 - bitmask là kĩ thuật sử dụng các biến riêng lẻ để biểu thị cho một trạng thái : 1 - bật , 0 - tắt
 - Các phép toán bitmask 
- _set bit_: sử dụng toán tử OR
- _clear bit_: sử dụng toán tử đảo ~ và AND (lưu ý đảo xảy ra trước and)
- _toggle bit_ : sử dụng toán tử ^
- _check bit_: sử dụng toán tử AND "&"
+_set bit_: sử dụng toán tử OR
+_clear bit_: sử dụng toán tử đảo ~ và AND (lưu ý đảo xảy ra trước and)
+_toggle bit_ : sử dụng toán tử ^
+_check bit_: sử dụng toán tử AND "&"
 
- _ví dụ: Hãy xây dựng hệ thống quản lý quyền truy cập của người dùng bằng cách sử dụng kỹ thuật bitmask. Mỗi quyền sẽ được biểu diễn bằng một bit trong số nguyên. Hệ thống phải hỗ trợ các thao tác sau:**thêm quyền , xóa quyền , kiểm tra quyền , hiển thị quyền**_
+_ví dụ: Hãy xây dựng hệ thống quản lý quyền truy cập của người dùng bằng cách sử dụng kỹ thuật bitmask. Mỗi quyền sẽ được biểu diễn bằng một bit trong số nguyên. Hệ thống phải hỗ trợ các thao tác sau:**thêm quyền , xóa quyền , kiểm tra quyền , hiển thị quyền**_
 _gợi ý : ta cần định nghĩa 4 quyền bằng một bit trong số nguyên thêm quyền ta sử dụng toán set bit , xóa quyền ta sử dụng clear bit , kiểm tra quyền ta sử dụng check bit và hiển thị quyền đã có thì ta dựa trên check bit và xuất ra quyền đã có ở check bit_
 ```c
 >#include <stdio.h>
