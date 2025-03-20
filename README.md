@@ -1,5 +1,9 @@
- # COMPILER - PREPROCESS -MACRO
+ # ADVANCE C
+<details>
+<summary> COMPILER - PREPROCESS -MACRO</summary>
 - Quy trình biên dịch :
+
+
 
 _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo file.i (intermediate)_
 >gcc -E main.c -o main.i
@@ -48,13 +52,19 @@ void H(){
 ```
 ***ý nghĩa: học cách sử dụng ifndef : kiểm tra file.h đã được định nghĩa hay chưa ? nếu đã được định nghĩa thì không run đoạn chương trình phía dưới , nếu chưa định nghĩa thì run bình thường , phương pháp này có thể sử dụng để tránh trùng lặp hàm thư viện hoặc là việc định nghĩa file.h quá 1 lần***
 
-## STDART - ASSERT
+</details>
+<details>
+<summary>STDART - ASSERT</summary>
+ STDART - ASSERT
 - Stdart là một thư viện có các hàm điển hình như printf và scanf
 - cơ chế 
-_va_list_: **tạo biến**  
-_va_start_:**khởi tạo** liên kết với _va_list_ với tham số cố định :*ví dụ : va_start(ap ,format);*
-_va_arg_:**truy xuất tham số, phải chỉ định kiểu dữ liệu**
-_va_end_ : **dọn dẹp , giải phóng tài nguyên**
+
+| tên hàm      | giải thích       
+|-------------|-------------|
+| va_list   | tạo biến   | 
+| va_start   | khởi tạo liên kết với va_list với các tham số cố định : va_start(ap , format);   |
+|va_arg|truy vấn tham số , phải chỉ định kiểu dữ liệu|
+|va_end| dọn dẹp, giải phóng tài nguyên| 
 
 *ví dụ: viết hàm tính tổng cho số nguyên*
 ```c
@@ -85,14 +95,21 @@ void chia(int a , int b){
 }
 ```
 **lưu ý: nếu chúng ta bổ sung hàm "#define:NDEBUG" thì tất cả các assert sẽ bị tắt**
+</details>
 
-### BITMASK 
+
+<details>
+<summary>BITMASK</summary>
+ BITMASK 
 - bitmask là kĩ thuật sử dụng các biến riêng lẻ để biểu thị cho một trạng thái : 1 - bật , 0 - tắt
-- Các phép toán bitmask 
-_set bit_: sử dụng toán tử OR
-_clear bit_: sử dụng toán tử đảo ~ và AND (lưu ý đảo xảy ra trước and)
-_toggle bit_ : sử dụng toán tử ^
-_check bit_: sử dụng toán tử AND "&"
+-Các phép toán bitmask 
+
+| PHÉP TOÁN      | PHƯƠNG HƯỚNG HOẠT ĐỘNG       | 
+|-------------|-------------|
+| set bit  | sử dụng toán tử OR  | 
+| clear bit   |sử dụng toán tử đảo ~ và AND (lưu ý đảo xảy ra trước and)   | 
+|toggle bit|sử dụng toán tử ^|
+|check bit|sử dụng toán tử AND "&"|
 
 _ví dụ: Hãy xây dựng hệ thống quản lý quyền truy cập của người dùng bằng cách sử dụng kỹ thuật bitmask. Mỗi quyền sẽ được biểu diễn bằng một bit trong số nguyên. Hệ thống phải hỗ trợ các thao tác sau:**thêm quyền , xóa quyền , kiểm tra quyền , hiển thị quyền**_
 _gợi ý : ta cần định nghĩa 4 quyền bằng một bit trong số nguyên thêm quyền ta sử dụng toán set bit , xóa quyền ta sử dụng clear bit , kiểm tra quyền ta sử dụng check bit và hiển thị quyền đã có thì ta dựa trên check bit và xuất ra quyền đã có ở check bit_
@@ -232,3 +249,116 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
     return 0;
 }
 ```
+</details>
+
+<details>
+<summary>POINTER</summary>
+
+ POINTER 
+ - Con trỏ là một biến dùng để lưu địa chỉ của biến khác , nghĩa là biến thông thường chứa giá trị thì con trỏ chứa địa chỉ bộ nhớ (nơi mà giá trị được lưu trữ )  
+ __Khai báo con trỏ__
+ >kieu_du_lieu *ten_con_tro;
+ 
+ *ví dụ :*
+ ```c
+ int *ptr;
+ int *a;
+ ```
+ **Kiểu dữ liệu con trỏ cũng thể hiện kiểu dữ liệu mà biến nó trỏ đến theo nguyên tắc đồng kiểu dữ liệu**
+
+ **Gán địa chỉ cho con trỏ**
+ - Mỗi biến đều có 1 giá trị và 1 địa chỉ , để truy cập địa chỉ biến trong C ta sử dụng toán tử ***&***
+ _ví dụ:_
+ ```c
+ int so =5;
+ int *contro;
+ contro = & so;
+ ```
+ >bây giờ kết quả là biến _contro_ đang nắm giữ địa chỉ của biến _so_
+
+ **Truy xuất giá trị thông qua con trỏ**
+- Khác với truy cập địa chỉ con trỏ sử dụng toán tử __&__ thì truy xuất giá trị sử dụng toán tử __*__ (được gọi là tham trị).
+ __*__ ***:toán tử này truy xuất giá trị của địa chỉ mà con trỏ đang trỏ đến*** 
+*ví dụ:*
+```c
+int number =4;
+int *ptr =&number;
+printf("giá trị của number=%d",number);
+printf("địa chỉ của number=%d",&number);
+printf("giá trị của ptr=%d",ptr); 
+//giá trị của ptr là địa chỉ của number
+printf("giá trị của con trỏ ptr(giá trị tại địa chỉ mà ptr trỏ đến)=%d",*ptr);
+```
+**Sau đây là bảng tổng kết nội dung**
+| Đặc điểm      | Khai báo con trỏ       | Gán địa chỉ con trỏ       | Truy xuất con trỏ |
+|-------------|-------------|-------------|--------|
+| Cú pháp   | Kieu_du_lieu *Ten_con_tro   | Ten_con_tro =&Ten_bien   | *Ten_con_tro       |
+| Mục đích  | Khai báo một biến đặc biệt có khả năng lưu trữ địa chỉ biến khác   | lập mối quan hệ : gán địa chỉ của 1 biến vào con trỏ     | Truy cập giá trị tại địa chỉ mà con trỏ đang trỏ đến        |
+|Gía trị trả về | Không có | địa chỉ bộ nhớ | giá trị tại địa chỉ bộ nhớ 
+ 
+**Kích thước con trỏ**
+_ví dụ_:
+```c
+char *out;
+float *put;
+int *ar;
+```
+*Câu hỏi :Kích thước các con trỏ trên có giống nhau không?*
+>Tất cả các con trỏ đều có cùng 1 kích thước , KHÔNG PHỤ THUỘC VÀO KIỂU DỮ LIỆU MÀ CHÚNG TRỎ ĐẾN MÀ PHỤ THUỘC VÀO KIẾN TRÚC HỆ THỐNG (STM32, ESP32...)
+
+*Nguyên nhân :con trỏ lưu trữ địa chỉ mà địa chỉ bộ nhớ trên 1 hệ thống có kích thước cố định (hệ thống 64 bit :8 byte ...)*
+___Hiểu lầm : Nhiều người hiểu rằng (*int) lớn hơn (*char) .Điều này hoàn toàn sai : con trỏ lưu trữ địa chỉ nên kích thước của nó hoàn toàn không liên quan đến___
+ 
+ **Con trỏ void**
+ - Định nghĩa : void pointer là một loại con trỏ có thể trỏ đến dữ liệu của bất kì kiểu nào 
+ _ví dụ_
+ ```c
+ void *ptr;
+ ```
+> Con trỏ void không liên kết bất kì kiểu dữ liệu cụ thể nào , do đó nó có thể giữ địa chỉ của bất kì kiểu dữ liệu nào 
+ 
+_ví dụ_
+```c
+#include<stdio.h>
+int main(){
+    int a=10;
+    float b=11;
+    void *ptr;// khai báo con trỏ void 
+    // sử dụng con trỏ void trỏ đến kiểu int 
+    ptr =&a;
+    printf("Địa chỉ biến a :%p\n",ptr);
+    // sử dụng con trỏ đến kiểu float
+    ptr = &b;
+     printf("Địa chỉ biến a :%p\n",ptr);
+}
+```
+__Hạn chế của void pointer__
+- Con trỏ void không thể truy cập trự tiếp giải tham chiếu bằng toán tử * (Nguyên nhân trình biên dịch không biết phải đọc bao nhiêu byte để thực hiện giải tham chiếu )
+- Để truy cập giá trị , phải ép kiểu 
+```c
+void *ptr =&a;
+int value =*(int*)ptr; 
+// chúng ta phải ép kiểu (int*) , sử dụng tham chiếu * =*(int*)
+```
+***Sử dụng con trỏ void khi cần viết 1 hàm hoặc 1 cấu trúc có thể sẽ làm việc với nhiều kiểu dữ liệu , lưu ý luôn ghi nhớ kiểu dữ liệu gốc***
+
+**FUNCTION POINTER**
+- Mỗi hàm đều sẽ tồn tại trong bộ nhớ tại một địa chỉ nhất định 
+- Con trỏ hàm (Function pointer) là một biến đặc biệt dùng để lưu trữ địa chỉ của một hàm
+__cú pháp và cách khai báo__
+>kieu_tra_ve (*ten_con_tro)(ds_tham_so);
+
+**chú ý : dấu ngoặc đơn (*ten_con_tro) là bắt buộc**
+```c
+int (*ptr)(int , int);
+void (*gtr)(char*);
+```
+__Gán địa chỉ cho hàm__
+- Sau khi khai báo chúng ta cần gán địa chỉ : có 2 cách gán địa chỉ
+>cách 1:con_tro =&ten_ham;
+>cách 2:contro =ten_ham 
+
+
+
+
+</details>
