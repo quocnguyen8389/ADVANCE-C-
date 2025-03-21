@@ -1,14 +1,18 @@
  # ADVANCE C
+
+### Thời gian cập nhật  
+🔄 **Last Updated:** 2025-03-21 22:30:00 UTC
+
+### BÀI HỌC 
 <details>
-<summary> COMPILER - PREPROCESS -MACRO</summary>
+<summary>COMPILER - PREPROCESSOR</summary>
+
 - Quy trình biên dịch :
-
-
 
 _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo file.i (intermediate)_
 >gcc -E main.c -o main.i
     
- _Biên dịch : chuyển file.i sang file.s (assembly)_
+ _Biên dịch : chuyển file.i sang file.s (assembly),phân tích cú pháp, kiểm tra lỗi_
 >gcc -S main.i -O main.s.
     
  _Hợp ngữ :chuyển file.s sang file.o(mã máy)_
@@ -17,7 +21,7 @@ _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo f
 _Liên kết : tạo file thực thi bằng cách kết hợp các file.o_
 >gcc main.o -o main
 
-- the preprocess :
+- **the preprocess** : chỉ thực hiện thay thế các macro chứ không thực hiện tính toán 
 _include_
 *define*
 - Macro :
@@ -52,9 +56,43 @@ void H(){
 ```
 ***ý nghĩa: học cách sử dụng ifndef : kiểm tra file.h đã được định nghĩa hay chưa ? nếu đã được định nghĩa thì không run đoạn chương trình phía dưới , nếu chưa định nghĩa thì run bình thường , phương pháp này có thể sử dụng để tránh trùng lặp hàm thư viện hoặc là việc định nghĩa file.h quá 1 lần***
 
+**Toán tử tiền xử lý**
+- Toán tử tiếp tục "\\" : toán tử này cho phép bạn viết tiếp macro cho nhiều dòng 
+_ví dụ_
+```c
+#define macro_R(a , b)\
+printf("giá trị a=%d",a);\
+printf("chia 2 giá trị=%f",a/b);\
+while(0)\
+```
+- Toán tử stringize "#":toán tử này cho phép chuyển đổi các tham số thành chuỗi 
+_ví dụ_
+```c
+#define in(x) printf(#x "= %d",x); // #x đã chuyển thành chuỗi dù nằm ngoài nháy kép
+int a =6;
+in(a);
+```
+>kết quả : a=6
+
+- Toán tử token pasting "##" : toán tử nối 2 token lại với nhau 
+_ví dụ_
+```c
+#define ME (X,Y) X##Y
+
+int ME (HELLO,WORD) =5;
+```
+>KẾT QUẢ : HELLOWORD =5;
+
+***Câu hỏi :Sự khác biệt giữa #include <file.h> và #include "file.h" là gì ?***
+_#include <file.h> chỉ định tiền xử lý tìm kiếm file trong thư mục include của hệ thống_
+_#include "file.h" chỉ định tiền xử lý tìm kiếm trong file thư mục hiện tại trước, nếu không tìm thấy mới tìm trong hệ thống_
+
 </details>
+
+
 <details>
 <summary>STDART - ASSERT</summary>
+
  STDART - ASSERT
 - Stdart là một thư viện có các hàm điển hình như printf và scanf
 - cơ chế 
@@ -85,7 +123,9 @@ int main(){
      return 0;
 }
 ```
--***Assert***:dùng để kiểm tra điều kiện phải xảy ra trong quá trình run , nếu đúng điều kiện thì chương trình tiếp tục run , nếu sai thì chương trình sẽ dừng lại 
+-***Assert***:dùng để kiểm tra điều kiện phải xảy ra trong quá trình run , nếu đúng điều kiện thì chương trình tiếp tục run , nếu sai thì chương trình sẽ :
+  - In ra thông báo lỗi chi tiết (tên file , số dòng , biểu thức)
+  - Gọi hàm abort() để KẾT THÚC chương trình 
 _ví dụ:viết 1 chương trình sử dụng assert_
 ```c
 #include<assert.h>
@@ -94,15 +134,26 @@ void chia(int a , int b){
      printf("%d\n",a/b);
 }
 ```
-**lưu ý: nếu chúng ta bổ sung hàm "#define:NDEBUG" thì tất cả các assert sẽ bị tắt**
+_**Nguyên tắc vàng** để sử dụng assert: chỉ dùng để kiểm tra điều kiện tuyệt đối : tuyệt đối không bao giờ vi phạm hoặc tuyệt đối sẽ phải xuất hiện_
+**lưu ý: nếu chúng ta bổ sung hàm "#define:NDEBUG" thì tất cả các assert sẽ bị tắt , tuy nhiên phải define NDEBUG TRƯỚC khai báo thư viện _assert.h_**
 </details>
 
 
 <details>
 <summary>BITMASK</summary>
  BITMASK 
+ - Bitwise operators
+
+ | Toán tử      | ý nghĩa       | ứng dụng       |
+|-------------|-------------|-------------|
+| &   | AND   | check bit và clear bit   |
+|    | OR   | set bit   |
+|~|NOT|toggle bit |
+|<<|dịch trái   |nhân 2^n|
+|>>|dịch phải |chia 2^n|
+
 - bitmask là kĩ thuật sử dụng các biến riêng lẻ để biểu thị cho một trạng thái : 1 - bật , 0 - tắt
--Các phép toán bitmask 
+- Các phép toán bitmask 
 
 | PHÉP TOÁN      | PHƯƠNG HƯỚNG HOẠT ĐỘNG       | 
 |-------------|-------------|
@@ -145,6 +196,46 @@ int main(){
      display_per(user_permission);
 }
 ```
+**KĨ THUẬT BITMASK ĐỘNG**
+- Bitmask động cho phép tạo mặt nạ bit theo vị trí linh hoạt bất kì .Đây là kĩ thuật THUỘC LÒNG
+```c
+#define BIT_MASK(start ,end) ((~0U<< (start))&(~0U>>(31-(end))))
+```
+>"~0U" : tạo 32 bit toàn là 1 (0xFFFFFFFF)
+"<< (start)" : xóa các bit từ 0- start -1
+ ">>(31 -end)" : xóa các bit từ end+1 đến 31
+AND 2 kết quả : giữ lại bit từ start đến end
+
+_ví dụ_
+```c
+BIT_MASK(2,4);
+//kết quả sẽ bằng :0b011100 giữ lại số 1 tại vị trí từ 2-4
+```
+_ví dụ : hệ thống quản lý GPIO động_
+_YÊU CẦU : điều khiển 32 GPIO , SET CLEAR nhiều chân cùng lúc , toggle dải chân bất kì_
+```c
+typedef struct {
+    volatile uint32_t *port ;
+} GPIO_typeDef;
+void gpio_set(GPIO_typeDef *gpio, int start , int end){
+    uint32_t mask = BIT_MASK(start ,end)
+    *gpio->port |=mask;
+}
+```
+**BIT FIELDS**
+- Là 1 kĩ thuật giúp tiết kiêm bộ nhớ 
+_cú pháp_
+```c
+struct hall{
+    int tem :5;
+    float hum :3;
+}
+```
+>tổng là 8 bit thay vì nếu không khai báo số lượng bit thì sẽ là 16 bit chia đều cho 2 biến 
+
+<details>
+<summary>Phân tích mã nguồn slide 14</summary>
+
 **BÀI TẬP: Phân tích mã nguồn sau (slide 14 HALA)**
 ```c
 #include <stdio.h>
@@ -251,8 +342,9 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
 ```
 </details>
 
-<details>
-<summary>POINTER</summary>
+</details>
+
+
 
  POINTER 
  - Con trỏ là một biến dùng để lưu địa chỉ của biến khác , nghĩa là biến thông thường chứa giá trị thì con trỏ chứa địa chỉ bộ nhớ (nơi mà giá trị được lưu trữ )  
@@ -356,9 +448,33 @@ void (*gtr)(char*);
 __Gán địa chỉ cho hàm__
 - Sau khi khai báo chúng ta cần gán địa chỉ : có 2 cách gán địa chỉ
 >cách 1:con_tro =&ten_ham;
->cách 2:contro =ten_ham 
+>cách 2:contro =ten_ham ;
 
+**CẢ HAI CÁCH ĐỀU CHO KẾT QUẢ GIỐNG NHAU**
+_ví dụ_
+```c
+#include <stdio.h>
+int sub (int a , int b){
+    return a-b;
+}
+int main (){
+    int (*op)(int int);
+    op=&sub;
+    printf("kết quả %d\n ",op(4,3));// đáp án =1
+    op=sub;
+    printf("kết quả %d\n ",op(4,3));// đáp án =1
+}
+```
+**Gọi hàm thông qua con trỏ hàm**
+>(*con_tro_ham)(doi_so): cách 1
+(con_tro_ham)(doi_so) : cách 2
+
+***Bảng tổng hợp con trỏ hàm***
+| Khai báo con trỏ hàm     | Gán địa chỉ       | Gọi hàm thông qua con trỏ       |
+|-------------|-------------|-------------|
+|  kieu_tra_ve (*ten_con_tro)(ds_tham_so);  | con_tro =&ten_ham; hoặc contro =ten_ham ;   | (*con_tro_ham)(doi_so) hoặc (con_tro_ham)(doi_so)    |
 
 
 
 </details>
+
