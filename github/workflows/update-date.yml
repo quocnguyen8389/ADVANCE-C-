@@ -1,0 +1,18 @@
+name: Update Last Modified Date
+on:
+  push:
+    branches:
+      - main
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update date
+        run: |
+          sed -i "s/Last Updated:.*/Last Updated: $(date '+%Y-%m-%d %H:%M:%S')/" README.md
+      - name: Commit changes
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git commit -am "Auto-update last modified date"
+          git push
