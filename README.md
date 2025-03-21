@@ -1,4 +1,5 @@
  # ADVANCE C
+ 
 ### BÀI HỌC 
 <details>
 <summary>COMPILER - PREPROCESSOR</summary>
@@ -340,7 +341,8 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
 
 </details>
 
-
+<details>
+<summary>POINTER</summary>
 
  POINTER 
  - Con trỏ là một biến dùng để lưu địa chỉ của biến khác , nghĩa là biến thông thường chứa giá trị thì con trỏ chứa địa chỉ bộ nhớ (nơi mà giá trị được lưu trữ )  
