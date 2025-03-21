@@ -1,8 +1,4 @@
  # ADVANCE C
-
-### Thời gian cập nhật  
-🔄 **Last Updated:** 2025-03-21 22:30:00 UTC
-
 ### BÀI HỌC 
 <details>
 <summary>COMPILER - PREPROCESSOR</summary>
