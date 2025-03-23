@@ -91,7 +91,7 @@ _#include "file.h" chỉ định tiền xử lý tìm kiếm trong file thư m�
 <summary>STDART - ASSERT</summary>
 
  STDART - ASSERT
-- Stdart là một thư viện có các hàm điển hình như printf và scanf
+- STDART là một thư viện có các hàm điển hình như printf và scanf
 - cơ chế 
 
 | tên hàm      | giải thích       
@@ -341,7 +341,8 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
 
 </details>
 
-
+<details>
+<summary>POINTER</summary>
 
  POINTER 
  - Con trỏ là một biến dùng để lưu địa chỉ của biến khác , nghĩa là biến thông thường chứa giá trị thì con trỏ chứa địa chỉ bộ nhớ (nơi mà giá trị được lưu trữ )  
@@ -563,6 +564,102 @@ int main (){
 |3|*b = temp;|temp = 0x1000 → Gán *b = 0x1000 (ptr2 trỏ đến x)|
 
 **CONST POINTER**
+_Phân loại con trỏ hằng_
 
+| Loại       | Thay đổi địa chỉ        | Thay đổi giá trị       | Khởi tạo bắt buộc |
+|-------------|-------------|-------------|------|
+| Con trỏ thường     |    :white_check_mark:| :white_check_mark:|:x:|
+| Con trỏ hằng   |:white_check_mark:|:x:|:x:|
+| Hằng con trỏ   | :x:  | :white_check_mark:  |:white_check_mark:|
+|Hằng con trỏ đến hằng |:x:|:x:|:white_check_mark:|
+
+
+**Con trỏ hằng**
+_Mục đích:cho phép trỏ đến vùng nhớ nhưng KHÔNG thay đổi giá trị_
+_cú pháp_
+>const kieu_du_lieu *bien_con_tro;
+
+```c
+const int *ptr;
+```
+_ví dụ_
+```c
+int main(){
+    int value =10;
+    const int *ptr =&value;
+    *ptr=30;// LỖI: không thể thay đổi được giá trị của ptr
+    value =30;// Hợp lệ vì chúng ta thay đổi trực tiếp trên biến value không thông qua con trỏ
+    ptr=&new;// Hợp lệ vì thay đổi địa chỉ 
+}
+```
+_Bài học : dùng khi cần đảm bảo tính toàn vẹn của giá trị_
+**Hằng con trỏ**
+_Mục đích : cố định địa chỉ nhưng cho phép thay đổi giá trị_
+>kieu_du_lieu *const bien_con tro =&ten_bien ;
+
+***Lưu ý : phải khởi tạo ngay khi khai báo***
+
+```c
+int *const ptr=&near;
+```
+_ví dụ_
+```c
+int main(){
+    int x=5 , y=10;
+    int *const ptr =&x
+    *ptr =7; // Hợp lệ : thay đổi được giá trị 
+    ptr=&y; // Lỗi : không thể thay đổi giá trị 
+    return 0;
+}
+```
+**Hằng con trỏ đến hằng**
+_cú pháp_
+>const kieu_du_lieu *const ten_con_tro =&ten_bien;
+
+_Đặc điểm riêng: Không thay đổi được địa chỉ và cả giá trị_
+**Kĩ thuật và thủ thuật**
+_Quy tắc phân biệt_
+__Đọc từ phải sang trái__
+```c
+const int *p1;
+int const *p2;
+int *const p3;
+```
+>int *p1 : con trỏ đến hằng (const)
+const p3 hằng đến con trỏ (*p3)
+
+> hằng là không đổi 
+bên trái là địa chỉ - bên phải là giá trị // từ vỏ hộp(địa chỉ) vào trong hộp(giá trị) 
+chữ hằng nằm bên nào thì bên đó không đổi , còn lại là đổi được 
 </details>
+
+**CONTROL FLOW VÀ XỬ LÝ LỖI**
+_Tổng quan về Control Flow_
+Mặc định chương trình C thực hiện các câu lệnh từ trên xuống dưới .Như vậy , CPU làm từ hàm main , thực hiện lần lượt các câu lệnh và kết thúc tại điểm cuối hàm main
+Tuy nhiên, trong thực tế , chúng ta cần các cơ chế :
+- Thực thi một khối lệnh nhiều lần (vòng lặp : loops)
+- Thực thi một khối lệnh chỉ khi thỏa mãn một điều kiện nào đó (branches)
+- Nhảy đến 1 vị trí khác trong code (jumps)
+- Xử lý tình huống lỗi và ngoại lệ (error handling)
+
+**Câu lệnh goto**
+_Là câu lệnh cho phép chương trình nhảy vô điều kiện đến 1 vị trí được đánh dấu bởi một nhãn_
+_cú pháp_
+>goto labell;
+//các dòng code này sẽ được bỏ qua 
+label : statement;
+
+_ví dụ_
+```c
+#include <stdio.h>
+int main (){
+    int i=0;
+    start_loop:
+    printf("%d",i);
+    i++;
+    if(i<5)
+    goto start_loop;
+return 0;
+}
+```
 
