@@ -341,8 +341,7 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
 
 </details>
 
-<details>
-<summary>POINTER</summary>
+
 
  POINTER 
  - Con trỏ là một biến dùng để lưu địa chỉ của biến khác , nghĩa là biến thông thường chứa giá trị thì con trỏ chứa địa chỉ bộ nhớ (nơi mà giá trị được lưu trữ )  
@@ -472,7 +471,98 @@ int main (){
 |-------------|-------------|-------------|
 |  kieu_tra_ve (*ten_con_tro)(ds_tham_so);  | con_tro =&ten_ham; hoặc contro =ten_ham ;   | (*con_tro_ham)(doi_so) hoặc (con_tro_ham)(doi_so)    |
 
+**POINTER NULL**
+- Con trỏ null là con trỏ không trỏ đến bất kì địa chỉ hợp lệ nào 
+```c
+int *ptr = NULL;
+```
+***Tại sao lại sử dụng con trỏ NULL?***
+- Phòng tránh truy cập vùng nhớ rác :con trỏ chưa khởi tạo chứa giá trị ngẫu nhiên , giá trị ngẫu nhiên này vô tình trỏ đến vùng nhớ nguy hiểm 
+- Kiểm tra : dễ dàng phát hiện con trỏ chưa được gán giá trị hợp lệ 
+_ví dụ_
+```c
+#include <stdio.h>
+int main (){
+    int *ptr =NULL; // khởi tạo 1 con trỏ NULL
+    if(ptr=NULL){
+        printf("con trỏ chưa được khởi tạo\n");
+    }
+    int giatri=3;
+    ptr=&giatri;
+    return 0;
+}
+```
+***Lưu ý : đối với con trỏ NULL không thể tham trị con trỏ NULL***
 
+**POINTER TO POINTER**
+_Tại sao cần đến con trỏ đến con trỏ?_
+_Là khi bạn muốn thay đổi ĐỊA CHỈ mà một con trỏ đang trỏ đến từ bên trong con trỏ khác_
+_ví dụ_
+```c
+void change(int *ptr){
+int value =20;
+ptr=&value;   // giá trị ptr(địa chỉ biến a trong p) đang được gán là địa chỉ value
+}
+int main ()
+{
+    int a=10;
+    int *p=&a;
+    change(p);
+    printf("%d",*p);//kết quả vẫn bằng 10
+}
+```
+>value là biến toàn cục chỉ tồn tại trong phạm vi hàm => khi kết thúc hàm , địa chỉ value không còn hợp lệ 
+>giải pháp : dùng con trỏ cấp 2 để thay đổi con trỏ gốc
+
+**Khai báo**
+```c
+int **pptr;
+```
+_Minh họa_
+_pptr có giá trị là địa chỉ của biến ptr_
+_ptr có giá trị là địa chỉ biến value_
+_value có giá trị là 20_
+>nếu *pptr thì chỉ truy cập giá trị của biến ptr là địa chỉ biến value
+nếu **pptr thì sẽ truy cập đến giá trị của value
+
+_ví dụ kinh điển:_
+```c
+#include <stdio.h>
+void swap_pointer(int **a , int **b){
+    //int **a(b) cho phép truy cập và sửa đổi địa chỉ mà ptr1 và ptr2 trỏ đến nghĩa là sửa đổi địa chỉ 0x1000 và 0x2000
+    int *temp =*a;//a=&ptr1(giá trị của a là địa chỉ ptr1=0x3000), vậy *a =giá trị ptr1=0x1000(địa chỉ biến x)
+    //temp=0x1000, vậy *temp =giá trị x =10;
+    *a=*b;
+    //b=&ptr2(0x4000) vậy *b=giá trị tại ptr2(0x2000)
+    // a=0x2000; *a=20;
+    *b=temp;//b=0x1000, vậy *b=10;
+}
+int main (){
+    int x=10,y=20;
+    int *ptr1=&x; // gán giá trị ptr1 là địa chỉ biến x
+    //ví dụ: địa chỉ x =0x1000 , ptr1=0x1000 , địa chỉ ptr1=0x3000
+    int *ptr2=&y; // gán giá trị ptr2 là địa chỉ biến y
+    // ví dụ : địa chỉ y=0x2000 , ptr2=0x2000 , địa chỉ ptr2=0x4000
+    printf("Trước swap:\n");
+    printf("ptr1 → %d\n", *ptr1); // 10
+    printf("ptr2 → %d\n", *ptr2); // 20
+    swap_pointers(&ptr1, &ptr2);
+    // truyền đại chỉ biến ptr1=0x3000, và ptr2=0x4000 
+    // tại thời điểm này, không truyền giá trị của ptr1 và ptr2 vì chúng ta cần thay đổi địa chỉ 2 con trỏ 
+    printf("Sau swap:\n");
+    printf("ptr1 → %d\n", *ptr1); // 20
+    printf("ptr2 → %d\n", *ptr2); // 10
+
+    return 0;
+}
+```
+| Bước       | code       | giải thích     |
+|-------------|-------------|-------------|
+| 1  | int *temp = *a;  | *a là giá trị tại 0x3000 (0x1000) → temp = 0x1000 (trỏ đến x)  |
+| 2   | *a = *b;   | *b là giá trị tại 0x4000 (0x2000) → Gán *a = 0x2000 (ptr1 trỏ đến y)   |
+|3|*b = temp;|temp = 0x1000 → Gán *b = 0x1000 (ptr2 trỏ đến x)|
+
+**CONST POINTER**
 
 </details>
 
