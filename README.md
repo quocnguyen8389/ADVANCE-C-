@@ -632,6 +632,8 @@ const p3 hằng đến con trỏ (*p3)
 bên trái là địa chỉ - bên phải là giá trị // từ vỏ hộp(địa chỉ) vào trong hộp(giá trị) 
 chữ hằng nằm bên nào thì bên đó không đổi , còn lại là đổi được 
 </details>
+<details>
+<summary>CONTROL FLOW VÀ XỬ LÝ LỖI</summary>
 
 **CONTROL FLOW VÀ XỬ LÝ LỖI**
 _Tổng quan về Control Flow_
@@ -662,4 +664,150 @@ int main (){
 return 0;
 }
 ```
+**Câu lệnh SETJMP và LONGJMP**
+_Cơ chế hoạt động_
+- SETJMP : lưu trữ trạng thái hiện tại vào biến jmb_buf
+-LONGJMP : khôi phục trạng thái đã lưu , làm cho chương trình tiếp tục thực thi từ vị trí setjmp ban đầu 
+```c
+#include <setjmp.h>
+jmp_buf env; // biến lưu trữ trạng thái 
+int R =setjmp(env);// Lưu trữ trạng thái hiện tại 
+void longjmp(jmp_buf env , int val); // khôi phục trạng thái 
+```
+_Lưu ý : setjmp : đánh dấu vị trí có thể quay lại bằng longjmp_
+_Kết quả trả về lần đầu tiên bằng 0 , trả về 1 giá trị khác cho lần tiếp theo_
+_Longjmp : nhảy về vị trí hiện tại khi thực hiện setjmp và tiếp tục_
+```c
+#include <stdio.h>
+#include <setjmp.h>
+jmp_buf env;// biến lưu trạng thái 
+void chia_so(int a, int b){
+    if(b==0){
+        printf("Phát hiện lỗi chia 0\n");
+        longjmp(env,1); // nhảy đến vị trí setjmp với giá trị 1 
+    }
+    printf("KQ %d\n", a/b);
+}
+int main(){
+    int error = setjmp(env);// lập chốt kiểm tra lỗi 
+    if(error==0){
+        printf("Thực hiện phép chia \n");
+    }
+    else
+    printf("ĐÃ XẢY RA LỖI");
+}
+```
+**Xử lý ngoại lệ**
+- Khối TRY : là phạm vi thực thi có khả năng sinh lỗi , không được sử dụng đơn độc mà phải đi kèm với catch , throw
+- Khối THROW : tạo đối tượng ngoại lệ chứa thông tin debug
+- Khối CATCH: Bẫy lỗi thông minh 
+<details>
+<summary>BÀI TẬP SỐ 2</summary>
 
+BÀI TẬP SỐ 2:
+ Xử Lý Nhiều Loại Lỗi Trong Hệ Thống Phức Tạp Sử Dụng Macro TRY-CATCH
+Mục Tiêu:
+- Viết một chương trình trong ngôn ngữ C sử dụng các macro TRY, CATCH, và THROW để mô phỏng việc xử lý nhiều loại lỗi trong một hệ thống phức tạp.
+Yêu Cầu:
+- Định nghĩa các macro TRY, CATCH, và THROW giúp xử lý lỗi trong chương trình.
+- Tạo các hàm giả lập các hoạt động khác nhau, mỗi hàm có khả năng "ném" ra một loại lỗi cụ thể sử dụng macro THROW.
+- Trong hàm main, gọi các hàm này trong một khối TRY và xử lý các lỗi tương ứng trong các khối CATCH phù hợp.
+- Các loại lỗi có thể bao gồm nhưng không giới hạn ở: lỗi đọc file, lỗi xử lý mạng, lỗi tính toán dữ liệu.
+- In ra thông báo lỗi phù hợp khi một lỗi được bắt và xử lý.
+Mô Tả Chi Tiết Hơn:
+- Bạn cần viết ba hàm mô phỏng ba hoạt động khác nhau: readFile, networkOperation, và calculateData.
+Mỗi hàm này sẽ sử dụng THROW để ném ra một loại lỗi cụ thể khi gặp sự cố.
+- Trong main, sử dụng TRY để bao quanh việc gọi các hàm này và sử dụng các khối CATCH để xử lý từng loại lỗi riêng biệt.
+Mỗi khối CATCH sẽ in ra một thông báo lỗi đặc trưng cho lỗi tương ứng.
+- Đảm bảo chương trình kết thúc một cách an toàn, in ra thông báo kết thúc chương trình sau khi tất cả các lỗi đã được xử lý.
+Cho một enum lưu các mã lỗi như sau: 
+```C
+enum ErrorCodes { NO_ERROR, FILE_ERROR, NETWORK_ERROR, CALCULATION_ERROR };
+```
+- Thông tin các hàm:
+```c
+void readFile() {
+    printf("Đọc file...\n");
+    THROW(FILE_ERROR, "Lỗi đọc file: File không tồn tại.");
+}
+void networkOperation() {
+    // Bổ sung chương trình
+}
+void calculateData() {
+   // Bổ sung chương trình
+}
+```
+- Chương trình trong hàm main:
+```c
+TRY {
+        readFile();
+        networkOperation();
+        calculateData();
+    } CATCH(FILE_ERROR) {
+        printf("%s\n", error_message);} // Bổ sung thêm nhiều CATCH
+```
+**GIẢI**
+```C
+#include<stdio.h>
+#include<stdlid.h>
+#include<setjmp.h>
+enum ErrorCodes { 
+    NO_ERROR, 
+    FILE_ERROR, 
+    NETWORK_ERROR, 
+    CALCULATION_ERROR 
+};// định nghĩa các mã lỗi 
+
+typedef struct {
+    int code; // mã lỗi
+    const char* message; // thông báo lỗi 
+}Error_Info;
+jmp_buf env;// lưu trữ thông tin lỗi 
+#define TRY if(Error_Info.code==0) // nếu setjmp=0 thực thi code trong TRY , và khác 0 nhảy đến CATCH
+#define CATCH(error_code)\
+else if(Error_Info.code == error_code)
+#define THROW (code,message)\
+Error_Info.code=code;\ // GÁN MÃ LỖI 
+Error_Info.message=message;\ // GÁN THÔNG BÁO LỖI
+longjmp(env,code)\ //
+void readFile() {
+    printf("Đang đọc file...\n");
+    // Giả lập lỗi đọc file
+    THROW(FILE_ERROR, "Lỗi đọc file: File không tồn tại hoặc bị khóa");
+}
+
+void networkOperation() {
+    printf("Đang thực hiện kết nối mạng...\n");
+    // Giả lập lỗi mạng
+    THROW(NETWORK_ERROR, "Lỗi mạng: Không thể kết nối đến server");
+}
+
+void calculateData() {
+    printf("Đang tính toán dữ liệu...\n");
+    // Giả lập lỗi tính toán
+    THROW(CALCULATION_ERROR, "Lỗi tính toán: Giá trị đầu vào không hợp lệ");
+}
+int main() {
+Error_Info.code=setjmp(env);
+    TRY {
+        readFile();
+        networkOperation();
+        calculateData();
+    }
+    CATCH(FILE_ERROR) {
+        fprintf(stderr, "[LỖI %d] %s\n", current_error.code, current_error.message);
+    }
+    CATCH(NETWORK_ERROR) {
+        fprintf(stderr, "[LỖI %d] %s\n", current_error.code, current_error.message);
+    }
+    CATCH(CALCULATION_ERROR) {
+        fprintf(stderr, "[LỖI %d] %s\n", current_error.code, current_error.message);
+    }
+
+    printf("\nKết thúc chương trình an toàn\n");
+    return 0;
+}
+```
+</details>
+
+</details>
