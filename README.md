@@ -1007,7 +1007,10 @@ void ham(){
 ```
 _Nguyên lý hoạt động:_
 _Khi bạn làm việc với nhiều file.c trong dự án quá trình biên dịch sẽ diễn ra ở điểm quan trọng là : extern cho các trình liên kết biết rằng " biến này ở đâu đó trong các file , hãy tìm và liên kết "_
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 **fileA.c(định nghĩa biến)**
 ```c
 int same=10;
@@ -1025,7 +1028,10 @@ int main (){
 extern int a; // đúng: khai báo extern không khởi tạo giá trị 
 extern int a =300; // sai :khai báo extern đã vi phạm khởi tạo giá trị
 ```
-***Bài tập cá nhân***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Bài tập cá nhân***
 - Tạo 3 file : math.h( khai báo extern PI 3.14) , circle.c (định nghĩa PI và hàm tính diện tích hình tròn) , main.c (sử dụng PI và hàm circle.c)
 - Yêu cầu : sử dụng extern cho cả biến và hàm , in ra diện tích hình tròn và bán kính nhập từ bàn phím 
 ```c
@@ -1055,10 +1061,16 @@ int main(){
 
 - Là công cụ kiểm soạt phạm vi và thời gian tồn tại của biến và hàm 
 - Nó hoạt động khác biệt giữa 2 ngữ cảnh : biến cục bộ trong hàm và biến/hàm toàn cục 
-***STATIC CHO BIẾN CỤC BỘ TRONG HÀM***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">STATIC CHO BIẾN CỤC BỘ TRONG HÀM***
 _ĐẶC ĐIỂM :_
 _Khởi tạo một lần duy nhất khi chương trình bắt đầu(nếu chưa được khởi tạo sẽ tự gán giá trị bằng 0), giữ giá trị giữa các lần gọi hàm, chỉ có phạm vi trong hàm_
-_ví dụ kinh điển_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ kinh điển_
 ```c
 #include <stdio.h>
 void count(){
@@ -1095,13 +1107,22 @@ _Kết quả_
 Số lần gọi: 1
 Số lần gọi: 1
 
-***STATIC CHO BIẾN/HÀM TOÀN CỤC***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">STATIC CHO BIẾN/HÀM TOÀN CỤC***
 _Tính năng_
 - giới hạn phạm vi trong file hiện tại 
 - Ngăn xung đột tên 
 - Thường được dùng với mẹo là ẩn biến /hàm khỏi các file khác , chỉ cho phép truy cập trong cùng 1 file 
-***Bài tập cá nhân***
-_BÀI 1:Phân tích output chương trình sau_
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Bài tập cá nhân***
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">BÀI 1:Phân tích output chương trình sau_
 ```c
 #include <stdio.h>
 
@@ -1121,7 +1142,10 @@ _Kết quả_
 >1 2
 
 _Nguyên nhân biến x chưa được khởi tạo sẽ tự động gán giá trị là 0_
-_BÀI 22:Phân tích output chương trình sau_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">BÀI 2:Phân tích output chương trình sau_
 ```c
 #include <stdio.h>
 
@@ -1150,7 +1174,10 @@ Kết quả x=5   // static tồn tại trong cả file
      style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> VOLATILE***
 - Được sử dụng để khai báo 1 biến có giá trị của nó có thể thay đổi bất kỳ lúc nào bởi yếu tố tác động bên ngoài 
 - Ngăn trình biên dịch tối ưu hoặc xóa 1 biến đi
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 void wait(){
     uint8_t *status =(uint8_t*)0x2000000;
