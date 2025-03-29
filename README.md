@@ -2,9 +2,12 @@
  
 ### BÀI HỌC 
 <details>
-<summary>COMPILER - PREPROCESSOR</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">COMPILER - PREPROCESSOR</summary>
 
-- Quy trình biên dịch :
+ **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Quy trình biên dịch**
 
 _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo file.i (intermediate)_
 >gcc -E main.c -o main.i
@@ -18,7 +21,10 @@ _Tiền xử lý : loại bỏ các comment , xử lý include ,define , tạo f
 _Liên kết : tạo file thực thi bằng cách kết hợp các file.o_
 >gcc main.o -o main
 
-- **the preprocess** : chỉ thực hiện thay thế các macro chứ không thực hiện tính toán 
+- **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">the preprocess** : chỉ thực hiện thay thế các macro chứ không thực hiện tính toán 
 _include_
 *define*
 - Macro :
@@ -26,7 +32,10 @@ _include_
  *ifndef*
  *endif*
  
-*ví dụ 1 :ví dụ 1: viết 1 chương trình sử dụng define định nghĩa hàm nhân 2 giá trị với nhau với a=5+1; và b=6*
+*<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ 1 :ví dụ 1: viết 1 chương trình sử dụng define định nghĩa hàm nhân 2 giá trị với nhau với a=5+1; và b=6*
 ```c
 #include<stdio.h>
 #define mul(x,y) ((x)*(y))
@@ -39,9 +48,15 @@ int main()
      return 0;
 }
 ```
-***Ý nghĩa :học cách sử dụng define và lưu ý khi sử dụng 2 giá trị thì tối ưu hóa chúng bằng dấu ngoặc đơn từng giá trị tránh việc ưu tiên toán tử làm sai kết quả***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Ý nghĩa :học cách sử dụng define và lưu ý khi sử dụng 2 giá trị thì tối ưu hóa chúng bằng dấu ngoặc đơn từng giá trị tránh việc ưu tiên toán tử làm sai kết quả***
 
-*ví dụ: hãy viết 1 chương trình sử dụng #ifndef và giải thích tại sao sử dụng ?*
+*<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ: hãy viết 1 chương trình sử dụng #ifndef và giải thích tại sao sử dụng ?*
 ```c
 #ifndef MY_HEADER_H  
 #define MY_HEADER_H
@@ -51,11 +66,20 @@ void H(){
 }
 #endif
 ```
-***ý nghĩa: học cách sử dụng ifndef : kiểm tra file.h đã được định nghĩa hay chưa ? nếu đã được định nghĩa thì không run đoạn chương trình phía dưới , nếu chưa định nghĩa thì run bình thường , phương pháp này có thể sử dụng để tránh trùng lặp hàm thư viện hoặc là việc định nghĩa file.h quá 1 lần***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">ý nghĩa: học cách sử dụng ifndef : kiểm tra file.h đã được định nghĩa hay chưa ? nếu đã được định nghĩa thì không run đoạn chương trình phía dưới , nếu chưa định nghĩa thì run bình thường , phương pháp này có thể sử dụng để tránh trùng lặp hàm thư viện hoặc là việc định nghĩa file.h quá 1 lần***
 
-**Toán tử tiền xử lý**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Toán tử tiền xử lý**
 - Toán tử tiếp tục "\\" : toán tử này cho phép bạn viết tiếp macro cho nhiều dòng 
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 #define macro_R(a , b)\
 printf("giá trị a=%d",a);\
@@ -80,7 +104,10 @@ int ME (HELLO,WORD) =5;
 ```
 >KẾT QUẢ : HELLOWORD =5;
 
-***Câu hỏi :Sự khác biệt giữa #include <file.h> và #include "file.h" là gì ?***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Câu hỏi :Sự khác biệt giữa #include <file.h> và #include "file.h" là gì ?***
 _#include <file.h> chỉ định tiền xử lý tìm kiếm file trong thư mục include của hệ thống_
 _#include "file.h" chỉ định tiền xử lý tìm kiếm trong file thư mục hiện tại trước, nếu không tìm thấy mới tìm trong hệ thống_
 
@@ -88,11 +115,14 @@ _#include "file.h" chỉ định tiền xử lý tìm kiếm trong file thư m�
 
 
 <details>
-<summary>STDART - ASSERT</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">STDART - ASSERT</summary>
 
  STDART - ASSERT
 - STDART là một thư viện có các hàm điển hình như printf và scanf
-- cơ chế 
+ **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">cơ chế** 
 
 | tên hàm      | giải thích       
 |-------------|-------------|
@@ -101,7 +131,10 @@ _#include "file.h" chỉ định tiền xử lý tìm kiếm trong file thư m�
 |va_arg|truy vấn tham số , phải chỉ định kiểu dữ liệu|
 |va_end| dọn dẹp, giải phóng tài nguyên| 
 
-*ví dụ: viết hàm tính tổng cho số nguyên*
+*<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ: viết hàm tính tổng cho số nguyên*
 ```c
 #include<stdio.h>
 #include<stdarg.h>
@@ -120,10 +153,17 @@ int main(){
      return 0;
 }
 ```
--***Assert***:dùng để kiểm tra điều kiện phải xảy ra trong quá trình run , nếu đúng điều kiện thì chương trình tiếp tục run , nếu sai thì chương trình sẽ :
+-**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Assert**
+- Dùng để kiểm tra điều kiện phải xảy ra trong quá trình run , nếu đúng điều kiện thì chương trình tiếp tục run , nếu sai thì chương trình sẽ :
   - In ra thông báo lỗi chi tiết (tên file , số dòng , biểu thức)
   - Gọi hàm abort() để KẾT THÚC chương trình 
-_ví dụ:viết 1 chương trình sử dụng assert_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ:viết 1 chương trình sử dụng assert_
 ```c
 #include<assert.h>
 void chia(int a , int b){
@@ -131,15 +171,24 @@ void chia(int a , int b){
      printf("%d\n",a/b);
 }
 ```
-_**Nguyên tắc vàng** để sử dụng assert: chỉ dùng để kiểm tra điều kiện tuyệt đối : tuyệt đối không bao giờ vi phạm hoặc tuyệt đối sẽ phải xuất hiện_
-**lưu ý: nếu chúng ta bổ sung hàm "#define:NDEBUG" thì tất cả các assert sẽ bị tắt , tuy nhiên phải define NDEBUG TRƯỚC khai báo thư viện _assert.h_**
+_**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Nguyên tắc vàng** để sử dụng assert: chỉ dùng để kiểm tra điều kiện tuyệt đối : tuyệt đối không bao giờ vi phạm hoặc tuyệt đối sẽ phải xuất hiện_
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">lưu ý: nếu chúng ta bổ sung hàm "#define:NDEBUG" thì tất cả các assert sẽ bị tắt , tuy nhiên phải define NDEBUG TRƯỚC khai báo thư viện _assert.h_**
 </details>
 
 
 <details>
-<summary>BITMASK</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">BITMASK </summary>
  BITMASK 
- - Bitwise operators
+ **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Bitwise operators**
 
  | Toán tử      | ý nghĩa       | ứng dụng       |
 |-------------|-------------|-------------|
@@ -150,7 +199,10 @@ _**Nguyên tắc vàng** để sử dụng assert: chỉ dùng để kiểm tra 
 |>>|dịch phải |chia 2^n|
 
 - bitmask là kĩ thuật sử dụng các biến riêng lẻ để biểu thị cho một trạng thái : 1 - bật , 0 - tắt
-- Các phép toán bitmask 
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Các phép toán bitmask** 
 
 | PHÉP TOÁN      | PHƯƠNG HƯỚNG HOẠT ĐỘNG       | 
 |-------------|-------------|
@@ -159,7 +211,10 @@ _**Nguyên tắc vàng** để sử dụng assert: chỉ dùng để kiểm tra 
 |toggle bit|sử dụng toán tử ^|
 |check bit|sử dụng toán tử AND "&"|
 
-_ví dụ: Hãy xây dựng hệ thống quản lý quyền truy cập của người dùng bằng cách sử dụng kỹ thuật bitmask. Mỗi quyền sẽ được biểu diễn bằng một bit trong số nguyên. Hệ thống phải hỗ trợ các thao tác sau:**thêm quyền , xóa quyền , kiểm tra quyền , hiển thị quyền**_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ: Hãy xây dựng hệ thống quản lý quyền truy cập của người dùng bằng cách sử dụng kỹ thuật bitmask. Mỗi quyền sẽ được biểu diễn bằng một bit trong số nguyên. Hệ thống phải hỗ trợ các thao tác sau:**thêm quyền , xóa quyền , kiểm tra quyền , hiển thị quyền**_
 _gợi ý : ta cần định nghĩa 4 quyền bằng một bit trong số nguyên thêm quyền ta sử dụng toán set bit , xóa quyền ta sử dụng clear bit , kiểm tra quyền ta sử dụng check bit và hiển thị quyền đã có thì ta dựa trên check bit và xuất ra quyền đã có ở check bit_
 ```c
 >#include <stdio.h>
@@ -193,7 +248,10 @@ int main(){
      display_per(user_permission);
 }
 ```
-**KĨ THUẬT BITMASK ĐỘNG**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">KĨ THUẬT BITMASK ĐỘNG**
 - Bitmask động cho phép tạo mặt nạ bit theo vị trí linh hoạt bất kì .Đây là kĩ thuật THUỘC LÒNG
 ```c
 #define BIT_MASK(start ,end) ((~0U<< (start))&(~0U>>(31-(end))))
@@ -208,7 +266,10 @@ _ví dụ_
 BIT_MASK(2,4);
 //kết quả sẽ bằng :0b011100 giữ lại số 1 tại vị trí từ 2-4
 ```
-_ví dụ : hệ thống quản lý GPIO động_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ : hệ thống quản lý GPIO động_
 _YÊU CẦU : điều khiển 32 GPIO , SET CLEAR nhiều chân cùng lúc , toggle dải chân bất kì_
 ```c
 typedef struct {
@@ -219,7 +280,10 @@ void gpio_set(GPIO_typeDef *gpio, int start , int end){
     *gpio->port |=mask;
 }
 ```
-**BIT FIELDS**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">BIT FIELDS**
 - Là 1 kĩ thuật giúp tiết kiêm bộ nhớ 
 _cú pháp_
 ```c
@@ -231,7 +295,10 @@ struct hall{
 >tổng là 8 bit thay vì nếu không khai báo số lượng bit thì sẽ là 16 bit chia đều cho 2 biến 
 
 <details>
-<summary>Phân tích mã nguồn slide 14</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Phân tích mã nguồn slide 14</summary>
 
 **BÀI TẬP: Phân tích mã nguồn sau (slide 14 HALA)**
 ```c
@@ -342,14 +409,20 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
 </details>
 
 <details>
-<summary>POINTER</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">POINTER</summary>
 
- POINTER 
+ <img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> POINTER 
  - Con trỏ là một biến dùng để lưu địa chỉ của biến khác , nghĩa là biến thông thường chứa giá trị thì con trỏ chứa địa chỉ bộ nhớ (nơi mà giá trị được lưu trữ )  
  __Khai báo con trỏ__
  >kieu_du_lieu *ten_con_tro;
  
- *ví dụ :*
+ *<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ :*
  ```c
  int *ptr;
  int *a;
@@ -369,7 +442,10 @@ _in ra kích cỡ của mycar dựa trên sizeof()_
  **Truy xuất giá trị thông qua con trỏ**
 - Khác với truy cập địa chỉ con trỏ sử dụng toán tử __&__ thì truy xuất giá trị sử dụng toán tử __*__ (được gọi là tham trị).
  __*__ ***:toán tử này truy xuất giá trị của địa chỉ mà con trỏ đang trỏ đến*** 
-*ví dụ:*
+*<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ:*
 ```c
 int number =4;
 int *ptr =&number;
@@ -379,29 +455,47 @@ printf("giá trị của ptr=%d",ptr);
 //giá trị của ptr là địa chỉ của number
 printf("giá trị của con trỏ ptr(giá trị tại địa chỉ mà ptr trỏ đến)=%d",*ptr);
 ```
-**Sau đây là bảng tổng kết nội dung**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Sau đây là bảng tổng kết nội dung**
 | Đặc điểm      | Khai báo con trỏ       | Gán địa chỉ con trỏ       | Truy xuất con trỏ |
 |-------------|-------------|-------------|--------|
 | Cú pháp   | Kieu_du_lieu *Ten_con_tro   | Ten_con_tro =&Ten_bien   | *Ten_con_tro       |
 | Mục đích  | Khai báo một biến đặc biệt có khả năng lưu trữ địa chỉ biến khác   | lập mối quan hệ : gán địa chỉ của 1 biến vào con trỏ     | Truy cập giá trị tại địa chỉ mà con trỏ đang trỏ đến        |
 |Gía trị trả về | Không có | địa chỉ bộ nhớ | giá trị tại địa chỉ bộ nhớ 
  
-**Kích thước con trỏ**
-_ví dụ_:
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> Kích thước con trỏ**
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_:
 ```c
 char *out;
 float *put;
 int *ar;
 ```
-*Câu hỏi :Kích thước các con trỏ trên có giống nhau không?*
+*<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Câu hỏi :Kích thước các con trỏ trên có giống nhau không?*
 >Tất cả các con trỏ đều có cùng 1 kích thước , KHÔNG PHỤ THUỘC VÀO KIỂU DỮ LIỆU MÀ CHÚNG TRỎ ĐẾN MÀ PHỤ THUỘC VÀO KIẾN TRÚC HỆ THỐNG (STM32, ESP32...)
 
 *Nguyên nhân :con trỏ lưu trữ địa chỉ mà địa chỉ bộ nhớ trên 1 hệ thống có kích thước cố định (hệ thống 64 bit :8 byte ...)*
 ___Hiểu lầm : Nhiều người hiểu rằng (*int) lớn hơn (*char) .Điều này hoàn toàn sai : con trỏ lưu trữ địa chỉ nên kích thước của nó hoàn toàn không liên quan đến___
  
- **Con trỏ void**
+ **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Con trỏ void**
  - Định nghĩa : void pointer là một loại con trỏ có thể trỏ đến dữ liệu của bất kì kiểu nào 
- _ví dụ_
+ _<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
  ```c
  void *ptr;
  ```
@@ -432,7 +526,10 @@ int value =*(int*)ptr;
 ```
 ***Sử dụng con trỏ void khi cần viết 1 hàm hoặc 1 cấu trúc có thể sẽ làm việc với nhiều kiểu dữ liệu , lưu ý luôn ghi nhớ kiểu dữ liệu gốc***
 
-**FUNCTION POINTER**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">FUNCTION POINTER**
 - Mỗi hàm đều sẽ tồn tại trong bộ nhớ tại một địa chỉ nhất định 
 - Con trỏ hàm (Function pointer) là một biến đặc biệt dùng để lưu trữ địa chỉ của một hàm
 __cú pháp và cách khai báo__
@@ -448,8 +545,14 @@ __Gán địa chỉ cho hàm__
 >cách 1:con_tro =&ten_ham;
 >cách 2:contro =ten_ham ;
 
-**CẢ HAI CÁCH ĐỀU CHO KẾT QUẢ GIỐNG NHAU**
-_ví dụ_
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">CẢ HAI CÁCH ĐỀU CHO KẾT QUẢ GIỐNG NHAU**
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 #include <stdio.h>
 int sub (int a , int b){
@@ -467,20 +570,32 @@ int main (){
 >(*con_tro_ham)(doi_so): cách 1
 (con_tro_ham)(doi_so) : cách 2
 
-***Bảng tổng hợp con trỏ hàm***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Bảng tổng hợp con trỏ hàm***
 | Khai báo con trỏ hàm     | Gán địa chỉ       | Gọi hàm thông qua con trỏ       |
 |-------------|-------------|-------------|
 |  kieu_tra_ve (*ten_con_tro)(ds_tham_so);  | con_tro =&ten_ham; hoặc contro =ten_ham ;   | (*con_tro_ham)(doi_so) hoặc (con_tro_ham)(doi_so)    |
 
-**POINTER NULL**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">POINTER NULL**
 - Con trỏ null là con trỏ không trỏ đến bất kì địa chỉ hợp lệ nào 
 ```c
 int *ptr = NULL;
 ```
-***Tại sao lại sử dụng con trỏ NULL?***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Tại sao lại sử dụng con trỏ NULL?***
 - Phòng tránh truy cập vùng nhớ rác :con trỏ chưa khởi tạo chứa giá trị ngẫu nhiên , giá trị ngẫu nhiên này vô tình trỏ đến vùng nhớ nguy hiểm 
 - Kiểm tra : dễ dàng phát hiện con trỏ chưa được gán giá trị hợp lệ 
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 #include <stdio.h>
 int main (){
@@ -493,12 +608,24 @@ int main (){
     return 0;
 }
 ```
-***Lưu ý : đối với con trỏ NULL không thể tham trị con trỏ NULL***
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Lưu ý : đối với con trỏ NULL không thể tham trị con trỏ NULL***
 
-**POINTER TO POINTER**
-_Tại sao cần đến con trỏ đến con trỏ?_
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">POINTER TO POINTER**
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Tại sao cần đến con trỏ đến con trỏ?_
 _Là khi bạn muốn thay đổi ĐỊA CHỈ mà một con trỏ đang trỏ đến từ bên trong con trỏ khác_
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 void change(int *ptr){
 int value =20;
@@ -526,7 +653,10 @@ _value có giá trị là 20_
 >nếu *pptr thì chỉ truy cập giá trị của biến ptr là địa chỉ biến value
 nếu **pptr thì sẽ truy cập đến giá trị của value
 
-_ví dụ kinh điển:_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ kinh điển:_
 ```c
 #include <stdio.h>
 void swap_pointer(int **a , int **b){
@@ -563,7 +693,10 @@ int main (){
 | 2   | *a = *b;   | *b là giá trị tại 0x4000 (0x2000) → Gán *a = 0x2000 (ptr1 trỏ đến y)   |
 |3|*b = temp;|temp = 0x1000 → Gán *b = 0x1000 (ptr2 trỏ đến x)|
 
-**CONST POINTER**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">CONST POINTER**
 _Phân loại con trỏ hằng_
 
 | Loại       | Thay đổi địa chỉ        | Thay đổi giá trị       | Khởi tạo bắt buộc |
@@ -574,7 +707,10 @@ _Phân loại con trỏ hằng_
 |Hằng con trỏ đến hằng |:x:|:x:|:white_check_mark:|
 
 
-**Con trỏ hằng**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Con trỏ hằng**
 _Mục đích:cho phép trỏ đến vùng nhớ nhưng KHÔNG thay đổi giá trị_
 _cú pháp_
 >const kieu_du_lieu *bien_con_tro;
@@ -582,7 +718,10 @@ _cú pháp_
 ```c
 const int *ptr;
 ```
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 int main(){
     int value =10;
@@ -593,7 +732,10 @@ int main(){
 }
 ```
 _Bài học : dùng khi cần đảm bảo tính toàn vẹn của giá trị_
-**Hằng con trỏ**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Hằng con trỏ**
 _Mục đích : cố định địa chỉ nhưng cho phép thay đổi giá trị_
 >kieu_du_lieu *const bien_con tro =&ten_bien ;
 
@@ -602,7 +744,10 @@ _Mục đích : cố định địa chỉ nhưng cho phép thay đổi giá tr�
 ```c
 int *const ptr=&near;
 ```
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 int main(){
     int x=5 , y=10;
@@ -612,7 +757,10 @@ int main(){
     return 0;
 }
 ```
-**Hằng con trỏ đến hằng**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Hằng con trỏ đến hằng**
 _cú pháp_
 >const kieu_du_lieu *const ten_con_tro =&ten_bien;
 
@@ -632,8 +780,9 @@ const p3 hằng đến con trỏ (*p3)
 bên trái là địa chỉ - bên phải là giá trị // từ vỏ hộp(địa chỉ) vào trong hộp(giá trị) 
 chữ hằng nằm bên nào thì bên đó không đổi , còn lại là đổi được 
 </details>
+
 <details>
-<summary>CONTROL FLOW VÀ XỬ LÝ LỖI</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">CONTROL FLOW VÀ XỬ LÝ LỖI</summary>
 
 **CONTROL FLOW VÀ XỬ LÝ LỖI**
 _Tổng quan về Control Flow_
@@ -644,14 +793,20 @@ Tuy nhiên, trong thực tế , chúng ta cần các cơ chế :
 - Nhảy đến 1 vị trí khác trong code (jumps)
 - Xử lý tình huống lỗi và ngoại lệ (error handling)
 
-**Câu lệnh goto**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Câu lệnh goto**
 _Là câu lệnh cho phép chương trình nhảy vô điều kiện đến 1 vị trí được đánh dấu bởi một nhãn_
 _cú pháp_
 >goto labell;
 //các dòng code này sẽ được bỏ qua 
 label : statement;
 
-_ví dụ_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 #include <stdio.h>
 int main (){
@@ -664,7 +819,10 @@ int main (){
 return 0;
 }
 ```
-**Câu lệnh SETJMP và LONGJMP**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Câu lệnh SETJMP và LONGJMP**
 _Cơ chế hoạt động_
 - SETJMP : lưu trữ trạng thái hiện tại vào biến jmb_buf
 -LONGJMP : khôi phục trạng thái đã lưu , làm cho chương trình tiếp tục thực thi từ vị trí setjmp ban đầu 
@@ -674,9 +832,16 @@ jmp_buf env; // biến lưu trữ trạng thái
 int R =setjmp(env);// Lưu trữ trạng thái hiện tại 
 void longjmp(jmp_buf env , int val); // khôi phục trạng thái 
 ```
-_Lưu ý : setjmp : đánh dấu vị trí có thể quay lại bằng longjmp_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Lưu ý : setjmp : đánh dấu vị trí có thể quay lại bằng longjmp_
 _Kết quả trả về lần đầu tiên bằng 0 , trả về 1 giá trị khác cho lần tiếp theo_
 _Longjmp : nhảy về vị trí hiện tại khi thực hiện setjmp và tiếp tục_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
 ```c
 #include <stdio.h>
 #include <setjmp.h>
@@ -697,12 +862,19 @@ int main(){
     printf("ĐÃ XẢY RA LỖI");
 }
 ```
-**Xử lý ngoại lệ**
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Xử lý ngoại lệ**
 - Khối TRY : là phạm vi thực thi có khả năng sinh lỗi , không được sử dụng đơn độc mà phải đi kèm với catch , throw
 - Khối THROW : tạo đối tượng ngoại lệ chứa thông tin debug
 - Khối CATCH: Bẫy lỗi thông minh 
 <details>
-<summary>BÀI TẬP SỐ 2</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">
+BÀI TẬP SỐ 2</summary>
 
 BÀI TẬP SỐ 2:
  Xử Lý Nhiều Loại Lỗi Trong Hệ Thống Phức Tạp Sử Dụng Macro TRY-CATCH
@@ -810,4 +982,225 @@ Error_Info.code=setjmp(env);
 ```
 </details>
 
+</details>
+<details>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">STORAGE CLASSES</summary>
+
+
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> EXTERN**
+
+- Cho phép biến được KHAI BÁO Ở MỘT FILE nhưng có thể SỬ DỤNG Ở FILE KHÁC.Nó tạo ra tham chiếu đến biến tồn tại thay vì tạo ra một biến mới 
+_Chú ý : Vì nó chỉ là một tham chiếu đến một biến đã được định nghĩa ở nơi khác nên KHÔNG CÓ BỘ NHỚ NÀO ĐƯỢC CẤP PHÁT_
+_Liên kết các nội dung_
+>gcc ten_file1.c ten_file2.c -o main 
+nhập "./tenfile_canchay"
+```C
+//khai báo extern 
+extern int bienToancuc;
+//sử dụng biến extern 
+void ham(){
+    printf("%d",bienToancuc);
+}
+```
+_Nguyên lý hoạt động:_
+_Khi bạn làm việc với nhiều file.c trong dự án quá trình biên dịch sẽ diễn ra ở điểm quan trọng là : extern cho các trình liên kết biết rằng " biến này ở đâu đó trong các file , hãy tìm và liên kết "_
+_ví dụ_
+**fileA.c(định nghĩa biến)**
+```c
+int same=10;
+```
+**fileB.c(sử dụng biến từ fileA.c)**
+```c
+#include<stdio.h>
+extern int same;// đây là biến toàn cục nên để ngoài hàm main
+int main (){
+    printf("biến extern :%d",same);
+}
+```
+**Lưu ý quan trọng: không được khởi tạo giá trị cho biến khi khai báo với extern**
+```c
+extern int a; // đúng: khai báo extern không khởi tạo giá trị 
+extern int a =300; // sai :khai báo extern đã vi phạm khởi tạo giá trị
+```
+***Bài tập cá nhân***
+- Tạo 3 file : math.h( khai báo extern PI 3.14) , circle.c (định nghĩa PI và hàm tính diện tích hình tròn) , main.c (sử dụng PI và hàm circle.c)
+- Yêu cầu : sử dụng extern cho cả biến và hàm , in ra diện tích hình tròn và bán kính nhập từ bàn phím 
+```c
+//math.h 
+extern const float PI  // thỏa mãn điều kiện extern không được khai báo và là biến toàn cục , đặt kiểu dữ liệu là float (số dư ) và const là hằng số q
+extern float circleA(float r) // đáp ứng yêu cầu đề bài là extern cả hàm 
+
+// circle.c
+const float PI 3.14
+float circleA(float r){
+return PI*r*r;}
+
+main.c
+#include "math.h"
+int main(){
+    float ban_kinh;
+    printf("nhập bán kính\n");
+    scanf("%f",&ban_kinh);
+    printf("Dientich:%.4f",circleA(ban_kinh));
+    return 0;
+}
+```
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> STATIC**
+
+- Là công cụ kiểm soạt phạm vi và thời gian tồn tại của biến và hàm 
+- Nó hoạt động khác biệt giữa 2 ngữ cảnh : biến cục bộ trong hàm và biến/hàm toàn cục 
+***STATIC CHO BIẾN CỤC BỘ TRONG HÀM***
+_ĐẶC ĐIỂM :_
+_Khởi tạo một lần duy nhất khi chương trình bắt đầu(nếu chưa được khởi tạo sẽ tự gán giá trị bằng 0), giữ giá trị giữa các lần gọi hàm, chỉ có phạm vi trong hàm_
+_ví dụ kinh điển_
+```c
+#include <stdio.h>
+void count(){
+    static int calls =0;// chỉ xảy ra 1 lần duy nhất
+    printf("Số lần gọi ;%d\n",calls);
+}
+int main (){
+    count();//1
+    count();//2
+    count();//3
+    printf("Số lần gọi trong main :%d\n",calls);// lỗi biến calls chỉ giữ giá trị trong hàm count và trong hàm main biến calls cũng không được định nghĩa nên gây lỗi
+    return 0;
+}
+```
+_Nếu bỏ dòng:_
+```c
+printf("Số lần gọi trong main :%d\n",calls);
+```
+_Kết quả in ra là :_
+>Số lần gọi: 1
+Số lần gọi: 2
+Số lần gọi: 3
+
+_Nếu thay thế_
+```c
+static int calls =0
+```
+thay thế bằng 
+```c
+int calls =0;
+```
+_Kết quả_
+>Số lần gọi: 1
+Số lần gọi: 1
+Số lần gọi: 1
+
+***STATIC CHO BIẾN/HÀM TOÀN CỤC***
+_Tính năng_
+- giới hạn phạm vi trong file hiện tại 
+- Ngăn xung đột tên 
+- Thường được dùng với mẹo là ẩn biến /hàm khỏi các file khác , chỉ cho phép truy cập trong cùng 1 file 
+***Bài tập cá nhân***
+_BÀI 1:Phân tích output chương trình sau_
+```c
+#include <stdio.h>
+
+void test() {
+    static int x ;
+    x++;
+    printf("%d ", x);
+}
+
+int main() {
+    test(); // ?
+    test(); // ?
+    return 0;
+}
+```
+_Kết quả_
+>1 2
+
+_Nguyên nhân biến x chưa được khởi tạo sẽ tự động gán giá trị là 0_
+_BÀI 22:Phân tích output chương trình sau_
+```c
+#include <stdio.h>
+
+static int x = 5;
+
+void test() {
+    static int x = 10;
+    x++;
+    printf("%d", x);
+}
+
+int main() {
+    test(); // ?
+    test(); // ?
+    printf("\nKết quả x=%d", x); // ?
+    return 0;
+}
+```
+_Kết quả_
+>11 12  //static tồn tại trong hàm 
+Kết quả x=5   // static tồn tại trong cả file
+
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> VOLATILE***
+- Được sử dụng để khai báo 1 biến có giá trị của nó có thể thay đổi bất kỳ lúc nào bởi yếu tố tác động bên ngoài 
+- Ngăn trình biên dịch tối ưu hoặc xóa 1 biến đi
+_ví dụ_
+```c
+void wait(){
+    uint8_t *status =(uint8_t*)0x2000000;
+
+    while (*status==0){
+        //thực hiện lệnh
+    }
+}
+```
+
+***Tuy nhiên trong code trên nếu không sử dụng volatide thì sẽ gặp tối ưu hóa vòng lặp nếu như quá trình lặp biến STATUS bằng 1 giá trị cố định quá nhiều lần***
+```c
+void wait(){
+   volatile uint8_t *status =(uint8_t*)0x2000000;
+
+    while (*status==0){
+        //thực hiện lệnh
+    }
+}
+```
+***Việc sử dụng volatile sẽ giúp biến luôn thay đổi thay vì cố định giá trị khi bị cố định giá trị trong vòng lắp quá nhiều lần***
+
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">REGISTER**
+- Là một gợi ý cho compiler lưu trữ biến trong CPU thay vì bộ nhớ RAM để tăng tốc độ truy cập
+_cú pháp_
+> register kieu_du_lieu ten_bien;
+
+_Hạn chế : REGISTER không thể lấy được địa chỉ bằng toán tử & , và số lượng thanh ghi có hạn nên không thể đặt tất cả các biến vào register_
+_ví dụ_
+```c
+void test(int arr[], int size){
+    register int i=0;
+    int sum=0;
+    for(in i , i<size , i++){
+        sum+=a[i];
+    }
+    return sum;
+}
+```
+***Trong ví dụ trên , biến i được đề xuất lưu vào thanh ghi vì nó được truy cập thường xuyên trong vòng lặp***
+
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Kết luận**
+- Extern cho phép truy cập biến/hàm từ các file khác , KHÔNG TẠO MỚI biến mà tham chiếu biến đã tồn tại trong các file (Không được khởi tạo khi khai báo)
+- Static :biến toàn cục giới hạn phạm vi chỉ trong file hiện tại , biến cục bộ giữ giá trị giữa các lần gọi ham 
+- Volatile giúp ngăn chặn các tối ưu hóa không mong muốn của compiler khi làm việc với biến có thể thay đổi từ bên ngoài 
+- Register là GỢI Ý để tăng tốc độ truy cập 
 </details>
