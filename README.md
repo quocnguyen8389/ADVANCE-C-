@@ -1231,3 +1231,102 @@ void test(int arr[], int size){
 - Volatile giúp ngăn chặn các tối ưu hóa không mong muốn của compiler khi làm việc với biến có thể thay đổi từ bên ngoài 
 - Register là GỢI Ý để tăng tốc độ truy cập 
 </details>
+
+<details>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">KIỂU DỮ LIỆU TÙY CHỈNH</summary>
+
+## KIỂU DỮ LIỆU TÙY CHỈNH 
+ **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">STRUCTS**
+- Cấu trúc STRUCT cho phép đóng gói các kiểu dữ liệu khác nhau thành 1 thể duy nhất
+- Mỗi thành phần trong STRUCT có một vùng nhớ riêng biệt 
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Quản lý bộ nhớ trong STRUCT***
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+struct B1{
+     char a; //1 byte
+     int b;  // 4 byte 
+     char c;  //1 byte 
+};
+// bộ nhớ B1 được cấp phát là 4 byte 
+// size = [1+ 3(padding)] + [4] + [1+3(padding)]=12 byte
+
+struct B2{
+     int a;//4 byte
+     char a; //1 byte
+     char c;  //1 byte 
+};
+// bộ nhớ B2 vẫn được cấp phát là 4 byte nhưng sẽ được tổ hợp khác 
+// size = [4] + [1] + [1] +[2] =8 byte 
+// 2 giá trị [1] và [1] được tổ hợp trong 4 byte tiếp theo sau 4 byte đầu
+```
+***Quy tắc vàng : sắp xếp thành phần theo thứ tự giảm dần kích thước để tối ưu hóa padding***
+**Kĩ thuật #pragma pack**
+_cú pháp_
+>#pragma pack(push , n)  //lưu trạng thái hiện tại và đặt n byte mới 
+#pragma pack(n)  // đặt alignment(n =1 ,2 ,4 ...)
+#pragma pack(pop) // khôi phục trạng thái trước đó 
+#pragma pack()  //reset về giá trị mặt định ( thường là 8)
+
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+#pragma pack(push , 1) // không padding 
+struct sensor {
+     uint8_t head;// 1 byte và 3 padding 
+     float arm;//4 byte
+     uint16_t ear;//2 byte +2 padding
+};
+#pragma pack(pop) // khôi phục padding
+// size =1+4+2=7
+//giảm từ 12 xuống 7
+```
+_Nhờ có việc sử dụng #pragma pack nên đã loại bỏ các byte padding_ 
+***Nhược điểm là sẽ gây nguy hiểm khi làm việc với DMA : DMA yêu cầu alignment chính xác theo phần cứng , việc thay đổi packing có thể dẫn đến lỗi hệ thống***
+
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">UNION**
+- Là kiểu dữ liệu cho phép các thành phần **chia sẻ cùng vùng nhớ**
+_Đặc điểm_
+- Tất cả các thành phần dùng chung 1 vùng nhớ
+- Kích thước UNION = thành phần lớn nhất 
+- Chỉ một thành phần có giá trị hợp lệ ở một thời điểm
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">So sánh UNION và STRUCT***
+
+| STRUCT        | UNION       |
+|-------------|-------------|
+| Mỗi thành phần có 1 vùng nhớ riêng    | Tất cả dùng chung vùng nhớ   | 
+| Kích thước lớn hơn hoặc bằng tổng thành phần    | Kích thước bằng thành phần lớn nhất    
+|Truy cập đồng thời được |Chỉ 1 thành phần tại 1 thời điểm|
+
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+struct R {
+     int a ;
+     char b;
+}; // size =8
+
+union R {
+     int a;
+     char b ;
+}; // size =4
+```
+</details>
