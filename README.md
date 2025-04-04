@@ -1330,3 +1330,169 @@ union R {
 }; // size =4
 ```
 </details>
+
+<details>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">MEMORY LAYOUT</summary>
+ MEMORY LAYOUT
+<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">TEXT SEGMENT
+
+- Là nơi chứa mã máy được phiên dịch từ mã nguồn .Đây là vùng nhớ quyết định cách chương trình vận hành và tương tác với phần cứng 
+_Đặc điểm_
+- Tính chỉ đọc (read-only)
+- Khả năng chia sẻ
+- Vị trí địa chỉ thấp
+_Thành phần nội dung_
+- Mã máy đã biên dịch : chứa toàn bộ chỉ thị thực thi dưới dạng nhị phân
+- Hằng số chương trình 
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">INITIALIZED DATA SEGMENT**
+- Là nơi lưu trữ các biến toàn cục và biến tĩnh đã được khởi tạo với giá trị cụ thể khác 0
+*ĐẶC ĐIỂM*
+- Tính đọc - ghi 
+- Phân loại :vùng chỉ đọc( chứa các hằng số const và chuỗi kí tự hằng) và vùng đọc ghi( chứa biến toàn cục , static có thể thay đổi giá trị)
+- Vị trí cao hơn text segment nhưng thấp hơn BSS trong không gian bộ nhớ ảo 
+*Lưu ý : các giá trị tự data segment được đọc từ file thực thi khi chương trình nạp vào bộ nhớ .Kích thước phân vùng này được xác định bởi kích thước của các biến trong mã nguồn và không thay đổi trong thời gian chạy*
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">Uninitialized data segment**
+- Còn được gọi là BSS segment(Block started by symbol) là nơi lưu trữ các biến toàn cục và biến tĩnh chưa khởi tạo hoặc khởi tạo với giá trị bằng 0
+*Đặc điểm*
+- Khởi tạo giá trị 0
+- Tiết kiệm không gian 
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+int gloman ;// biến toàn cục không khởi tạo được lưu trữ trong BSS
+int main(){
+     static int i;// biến tĩnh không khởi tạo được lưu trong BSS
+     return 0;
+}
+```
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">STACK**
+- Là vùng nhớ tự động 
+_Đặc điểm_
+- Cấp phát nhanh
+- Tự động giải phóng 
+- Biến cục bộ 
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">Ví dụ_
+```c
+void D{
+     int x=5; // biến x lưu trong stack
+}
+```
+***Stack frame***
+Mỗi hàm tạo bởi stack frame chứa :
+- Tham số hàm
+- Địa chỉ trả về 
+- Biến cục bộ 
+- Gía trị thanh ghi cần bảo tồn
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">HEAP**
+_Đặc điểm nổi bật_
+Heap là bộ nhớ động :
+- Kích thước linh hoạt
+- Truy cập qua con trỏ 
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+int *arr= malloc(1000000 * sizeof(int));// cấp phát 4mb trên heap
+free(arr); // giải phóng thủ công
+```
+***Quy trình quản lý heap***
+- malloc// calloc : cấp phát
+- realloc : thay đổi kích thước
+- free : giải phóng
+_Lưu ý : bổ sung thư viên stdlid.h_
+
+sử dụng hàm malloc()
+```c
+int size =5;
+uint16_t *ptr =(uint16_t*)malloc(size * sizeof(uint16_t));
+// tại sao sử dụng con trỏ ? vì cấp phát địa chỉ mà thao tác trên địa chỉ thì sử dụng con trỏ
+//kết quả trả về là con trỏ void nên cần được ép kiểu để đúng với các giá trị hiển thị 
+//Không khởi tạo giá trị , vùng nhớ sẽ chứa giá trị rác 
+```
+- Nên kiểm tra đã cấp phát giá trị hay chưa 
+```c
+if(ptr==NULL){
+     printf("cấp phát thất bại ");
+}
+```
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Bảng so sánh_
+| Tiêu chí       | Stack        | Heap      |
+|-------------|-------------|-------------|
+| Tốc độ   | Cực nhanh   | Chậm   |
+| Quản lý   | Tự động    | Thủ công   |
+|Truy cập |Biến cục bộ |Qua con trỏ |
+
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Bài tập được giao: tìm hiểu về sự khác biệt giữa calloc và malloc , realloc***
+Khi nào nên sử dụng :
+- MALLOC(): cần cấp phát nhanh , ghi đè toàn bộ dữ liệu ngay sau cấp phát , không quan tâm đến giá trị ban đầu 
+- CALLOC () :cần đcảm bảo tất cả các giá trị ban đầu đều là 0 , làm việc với dữ liệu nhạy cảm , cần an toàn hơn khi truy cập dữ liệu 
+- REALLOC (): cần thay đổi kích thước vùng nhớ đã cấp phát , muốn giữ nguyên dữ liệu hiện có khi thay đổi kích thước
+
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">So sánh chi tiết_
+
+| Tiêu chí       | Malloc()       | Calloc()       | realloc()|
+|-------------|-------------|-------------|-----|
+| Mục đích  | cấp phát vùng nhớ động mới   | Cấp phát và khởi tạo vùng nhớ mới   | thay đổi kích thước vùng nhớ đã cấp phát|
+| Khởi tạo giá trị    | Không(chứa giá trị rác )   | Có (tất cả đều là 0)   | giữ giá trị cũ và phần mới chứa biến rác|
+An toàn|ít an toàn |an toàn hơn do khởi tạo |cần xử lý trường hợp trả về NULL|
+
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Bài tập được giao 2: Những lưu ý quan trọng trong việc sử dụng cấp phát động***
+- Luôn kiểm tra NULL sau khi cấp phát :
+```c
+int *p =(int*)malloc(size);
+if(p== NULL){
+     //XỬ LÝ LỖI
+}
+```
+- Luôn giải phóng bộ nhớ khi không cần sử dụng 
+```c
+free(p);
+p=NULL; //GÁN NULL để tránh lỗi dangling pointer
+```
+- Cẩn thận với Realloc():
+```C
+int * temp =(int*)realloc(p,new_size);
+if(temp!=NULL){
+     p=temp;
+}else{
+     //xử lý lỗi , giữ nguyên p
+}
+```
+</details>
+
+
+
+
