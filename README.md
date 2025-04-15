@@ -1451,9 +1451,9 @@ _<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/
      height="25" 
      style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Bài tập được giao: tìm hiểu về sự khác biệt giữa calloc và malloc , realloc***
 Khi nào nên sử dụng :
-- MALLOC(): cần cấp phát nhanh , ghi đè toàn bộ dữ liệu ngay sau cấp phát , không quan tâm đến giá trị ban đầu 
-- CALLOC () :cần đcảm bảo tất cả các giá trị ban đầu đều là 0 , làm việc với dữ liệu nhạy cảm , cần an toàn hơn khi truy cập dữ liệu 
-- REALLOC (): cần thay đổi kích thước vùng nhớ đã cấp phát , muốn giữ nguyên dữ liệu hiện có khi thay đổi kích thước
+- MALLOC() :cần cấp phát nhanh , ghi đè toàn bộ dữ liệu ngay sau cấp phát , không quan tâm đến giá trị ban đầu 
+- CALLOC() :cần đcảm bảo tất cả các giá trị ban đầu đều là 0 , làm việc với dữ liệu nhạy cảm , cần an toàn hơn khi truy cập dữ liệu 
+- REALLOC() :cần thay đổi kích thước vùng nhớ đã cấp phát , muốn giữ nguyên dữ liệu hiện có khi thay đổi kích thước
 
 _<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
      width="50" 
@@ -1493,6 +1493,423 @@ if(temp!=NULL){
 ```
 </details>
 
+<details>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">LINKED LIST</summary>
 
+**<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">LINKED LIST**
+- Là cấu trúc dữ liệu bao gồm các nút (node) liên kết với nhau thông qua các liên kết (link)
+- Mỗi nút chứa 2 thành phần : dữ liệu và con trỏ trỏ đến nút tiếp theo của chuỗi
+- Đặc biệt , danh sách liên kết cấp phát bộ nhớ động trong quá trình chạy chương trình 
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+typedef struct Node{
+     int data; // dữ liệu nút
+    struct Node* next; // con trỏ đến nút kế tiếp 
+}
+```
+> chúng ta cần con trỏ head để lưu vị trí nút đầu tiên
 
+```c
+Node* head =NULL;
+```
+***Các thao tác cơ bản***
+- Thêm nút : có 2 vị trí cơ bản để thêm nút mới
+-- Thêm vào đầu danh sách
+_ví dụ minh họa_
+```c
+void insert (Node** head, int data){
+     Node* newNode =(Node*)malloc(sizeof(Node));
+     if(newNode == NULL){
+     printf("Lỗi cấp phát bộ nhớ");
+     return;
+     }
+     // gán dữ liệu 
+     newNode->data= data;
+     newNode->next = *head;
+     // cập nhật head
+     *head= newNode;
+}
+```
+-- Thêm vào cuối danh sách
+```c
+void insert (Node** head, int data){
+     Node* newNode =(Node*)malloc(sizeof(Node));
+     if(newNode == NULL){
+     printf("Lỗi cấp phát bộ nhớ");
+     return;
+     }
+     // gán dữ liệu 
+     newNode->data= data;
+     newNode->next = NULL;
+     // Nếu danh sách rỗng
+     if(*head == NULL){
+          *head = newNode;
+          return;
+     }
+     // tìm nút cuối cùng 
+     Node* last = *head;
+     while(last->new!= NULL){
+          last= last->new;
+     }
+     //liên kết nút cuối với nút mới 
+     last->new = newNode;
+}
+```
+-- Xóa nút 
+```c
+void deleteNode(Node** head , int key){
+     Node* temp =* heap;
+     Node* prev = NULL;
+     //Nếu nút cần xóa là head
+     if(temp != NULL && temp->data == key){
+          *head =temp->next;
+          free(temp);
+          return;
+     }
+     // tìm nút cần xóa
+     while(temp!= NULL && temp->data != key){
+          prev=temp;
+          temp= temp->next;
+     }
+     // nếu không tìm thấy key 
+     if(temp == NULL )
+     return;
+    // ngắt liên kết và giải phóng bộ nhớ
+    prev->next= temp->next;
+    free(temp);
+}
+```
+-- Duyệt danh sách
+```c
+void Display(Node* head){
+     Node* current=head;
+     while(current!= NULL){
+          printf("%d", current->data);
+          current=current->next;
+     }
+     printf("NULL");
+}
+```
+***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">TRICK***
+- Ngoài việc sử dụng void thì sẽ được lưu trên stack thì chúng ta có thể sử dụng con trỏ để được lưu trên heap 
+_ví dụ_
+```c
+// sử dụng void
+void create_note(Node *node , int newData){
+     node->next = NULL;
+     node->data =newData;
+}
+// sử dụng con trỏ 
+Node* create_note(int newData){
+     Node *node =(Node*)malloc(sizeof(Node));
+     node->next = NULL;
+     node->data =newData;
+     return node;
+}
+```
+</details>
 
+<details>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">STACK - QUEUE</summary>
+
+**STACK**
+- Hoạt động theo nguyên tắc Last In First Out (LIFO): vào sau ra trước (hình ảnh trực quan là chồng đĩa , nơi có thể thêm hoặc lấy đĩa từ đỉnh )
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Đặc điểm_
+- Tuân thủ quy tắc LIFO : vào sau ra trước 
+- Chỉ cho phép truy cập phần tử ở đỉnh 
+- Triển khai tất cả thao tác đều thực hiện trên đỉnh
+_Các thao tác cơ bản_
+1. **Push** : thêm phần tử ở đỉnh 
+2. **Pop** :lấy và xóa phần tử ở đỉnh
+3. **Peek/Top** : xem giá trị phần tử ở đỉnh mà không xóa 
+4. **isEmpty**: kiểm tra ngăn xếp có rỗng không 
+5. **isFull** : kiểm tra ngăn xếp có đầy chưa 
+
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Như vậy_
+- **push -> top++** : tăng thêm thì giá trị bổ sung 
+- **pop -> top--** : giảm đi thì giá trị phải trừ ra
+- **top =-1 -> stack rỗng**
+- **top =size - 1 -> stack đầy**
+
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ triển khai bằng mảng_
+```c
+typedef struct{
+     int *items;// mảng lưu phần tử 
+     int size ; // số lượng phần tử 
+     int top; // thể hiện giá trị đỉnh ở ngăn xếp
+}Stack;
+// khởi tạo giá trị 
+void stack_init(Stack *stack, int newSize ){
+     stack->items=(int*)malloc(newSize *sizeof(int));// cấp phát động ra vùng nhớ 
+     stack->size = newSize; // số lượng phần tử = newSize
+     stack->top = -1;// stack rỗng 
+}
+// kiểm tra rỗng 
+bool isEmpty(Stack stack){
+     return (stack.top == -1 ? true : false);
+}
+// kiểm tra stack đầy 
+bool isFull(Stack stack){
+     return (stack.top == (stack.size-1) ? true : false);
+}
+// thêm phần tử 
+void Push(Stack *stack , int data){
+     if(isFull(*stack)){ // kiểm tra đã đầy chưa
+          printf("full element\n");
+     }
+     else{
+          stack-> top++;// bổ sung vùng để thêm phần tử 
+          stack -> items[stack->top]=data;// ghi dữ liệu
+     }
+}
+// xóa phần tử 
+void Pop(Stack *stack , int data){
+     if(isEmpty(*stack)){ // kiểm tra đã đầy chưa
+          printf("empty element\n");
+     }
+     else{
+          int value = stack ->items[stack->top];// đọc giá trị hiện tại đỉnh
+          printf("giá trị top đỉnh=%d",value);
+          stack->items[stack->top]=0;// ghi đè giá trị xóa bằng 0
+          stack->top--;// xóa vùng cần đã ghi đè
+     }
+}
+// đọc giá trị đỉnh
+void Pop(Stack *stack , int data){
+     if(isEmpty(*stack)){ // kiểm tra đã đầy chưa
+          printf("empty element\n");
+     }
+     else{
+          
+          return stack->items[stack->top];
+     }
+}
+// giải phóng bộ nhớ 
+void free(Stack *stack){
+     if(stack->items != NULL){
+          free(stack->item);
+          stack->items==NULL;
+     }
+}
+```
+**QUEUE**
+- Hàng đợi là một cấu trúc dữ liệu tuyến tính được sử dụng lưu trữ và thao tác dữ liệu theo thứ tự 
+- Hoạt động theo nguyên tắc FIFO(First In First Out) : nghĩa là phần từ đầu tiên được đưa vào sẽ là phần từ đầu tiên được lấy ra
+- Một hàng đợi có hai đầu : đầu vào (rear) nơi các phần tử được thêm vào và đầu ra (front) nơi các phần tử lấy ra . 
+***ĐIỂM QUAN TRỌNG*** :hàng đợi mở cả 2 đầu , khác với stack chỉ mở 1 đầu 
+_Các thao tác cơ bản của hàng đợi_
+1. **isEmpty()** : kiểm tra xem hàng đợi có rỗng hay không 
+2. **isFull()** : kiểm tra xem hàng đợi có đầy hay không 
+3. **enqueue()** : thêm 1 phần tử ở cuối hàng đợi
+4. **dequeue()** : xóa 1 phần tử ở đầu hàng đợi
+5. **peek()** :xem phần tử ở hàng đợi đầu mà không xóa nó
+6. **initialize()** : khởi tạo 1 hàng đợi rỗng 
+_Các triển khai hàng đợi_: thường sử dụng 2 con trỏ
+1. **Front** : con trỏ đến phần tử đầu tiên hàng đợi
+2. **Rear** : con trỏ đến phần tử cuối cùng ở hàng đợi
+_Khi khởi tạo cả FRONT và REAR thường được đặt giá trị là -1 để biểu thị hàng đợi rỗng_
+
+*Khi tăng phần tử*
+> enqueue -> rear++
+rear =size -1 -> queue full
+
+*Khi giảm phần tử*
+>dequeue -> front++
+front == -1 hoặc front > rear hoặc front = rear + n ->queue empty
+
+<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);"> Linear queue : 
+
+-- Nếu REAR đạt tới giá trị max thì được coi là đầy và không thể thêm phần tử mới , ngay cả khi phía trước còn khoảng trống do các phần tử đã bị xóa 
+-- Chỉ có thể thêm phần tử mới khi đã dequeue toàn bộ các phần tử hiện có ( queue rỗng hoàn toàn và front set về vị trí ban đầu)
+```c
+typedef struct {
+     int *items;
+     int size;
+     int front;
+     int rear;
+}Queue;
+//khởi tạo thông số ban đầu 
+void queue_init(Queue *queue , int newSize){
+     queue->items = (int*)malloc( newSize * sizeof(int));
+     queue->size = newSize ;
+     queue->front = queue->rear = -1; // khởi tạo giá trị chỉ rằng hàng đợi đang rỗng
+}
+//kiểm tra hàng đợi rỗng 
+bool queue_isEmpty(Queue queue){
+     return (queue.front == -1 || queue.front > queue.rear)?true:false;
+     // tại đây có 2 điều kiện để xác định rỗng là front == -1 và trường hợp hàng đợi đã có phần tử nhưng bị xóa tất cả thể hiện front > rear
+     // (khi xóa front tăng lên 1 , sau khi xóa đến phần tử cuối cùng thì front = n , trong khi rear = n-1 . do đó front > rear )
+}
+// kiểm tra hàng đợi đầy 
+bool queue_isFull(Queue queue){
+     return (queue.rear == queue.size -1 )?true: false;
+}
+//thêm phần tử vào hàng đợi 
+void enqueue (Queue *queue , int value){
+     if(queue_isFull(*queue)){
+          printf("hàng đợi đầy\n");
+     }
+     else{
+          if(queue->front == -1){
+               queue->front == queue->rear=0;
+               // khi thêm giá trị đầu tiên thì front và rear từ -1 sẽ tăng lên 0 
+               // các trường hợp sau tăng thêm phần tử chỉ tăng rear 
+               // vậy nên cần ktra có rỗng hay không để xác định có phải là thêm phần tử đầu tiên hay không
+          }
+          else{
+               queue->rear++;
+          }
+          queue->items[queue->rear]= value;// tại vị trí trên ghi giá trị mới vào 
+     }
+}
+// xóa phần tử ở cuối đợi
+int dequeue(Queue queue){
+     if(queue_isEmpty(*queue)){
+          printf("hàng đợi rỗng\n");
+     }
+     else{
+          // lưu vào 1 biến tạm
+          int dequeue_value = queue->items[queue->front];
+          // set giá trị cần xóa về 0
+          queue->items[queue->front]=0;
+          if(queue->front == queue->rear && queue->rear == queue->size -1){
+               // theo điều kiện front = rear khi hàng đợi rỗng và hàng đợi chỉ còn 1 phần tử duy nhất 
+               // điều kiện rear = size -1 , xét đến phần tử cuối của mảng 
+               //nếu không sét về -1 thì front khi tăng sẽ lên 1 phần tử nằm ngoài mảng 
+               queue->front = queue->rear =-1;
+          }
+          else{
+               queue->front++;
+               // tăng front cho đến khi front = rear
+          }
+          return dequeue_value;
+     }
+}
+// đọc giá trị đầu hàng đợi
+int front(Queue queue){
+     if(queue_isEmpty(queue)){
+          printf("Hàng đợi rỗng\n");
+          return -1;
+     }
+     return queue.items[queue.front];
+}
+// đọc giá trị cuối hàng đợi
+int rear(Queue queue){
+      if(queue_isEmpty(queue)){
+          printf("Hàng đợi rỗng\n");
+          return -1;
+     }
+     return queue.items[queue.rear];
+}
+// giải phóng bộ nhớ 
+int queue_free(Queue *queue){
+     if(queue->items != NULL){
+          free(queue->items);
+          queue->items = NULL;
+     }
+}
+```
+ <img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(24%) sepia(73%) saturate(1446%) hue-rotate(212deg) brightness(98%) contrast(94%);">CIRCULAR QUEUE
+- ***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Điểm mấu chốt*** : circular queue giải quyết triệt để vấn đề lãng phí bộ nhớ trong Linear queue bằng cách cho phép rear và front "quay vòng" khi đạt đến cuối mảng 
+_Khác biệt cốt lõi giữa Linear queue và Circular queue_
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_
+```c
+bool queue_isFull(Queue queue){
+     return (queue.rear= queue.size -1)? true : false;
+}
+```
+ Nhược điểm chính :khi REAR đạt giá trị max_size dù FRONT đã được giải phóng không thể tái sử dụng vùng nhớ trống phía trước
+ _<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/RequestedChanges.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(76%) sepia(87%) saturate(461%) hue-rotate(139deg) brightness(104%) contrast(97%);">ví dụ_: với queue_size =5;
+ > ban đầu [A] [B] [C] [D] [E] (front =0 , rear =5-1=4)
+ sau khi dequeue 2 lần : front = 2, rear =4;
+ khoảng trống index 0 -1 không thể sử dụng 
+
+ **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Comment.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Kỹ thuật**: sử dụng phép modulo(%) tạo hiệu ứng vòng
+ ```c
+ queue->rear =(queue->rear + 1) % queue->size;
+ queue->front =(queue->front + 1) % queue->size;
+ ```
+ > cho phép rear/front nhảy về 0 khi đạt giá trị max
+
+ ***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(12%) sepia(92%) saturate(6282%) hue-rotate(12deg) brightness(101%) contrast(117%);">Cải tiến***
+ 1. Hàm kiểm tra đầy 
+ ```c
+ bool queue_isFull(Queue queue){
+     if(queue.front ==-1)
+     return false;
+return ((queue.rear + 1) % queue.size) == queue.front;
+ }
+ ```
+ 2. Hàm thêm phần tử 
+ ```c
+ void enqueue(Queue *queue , int value){
+     if(queue_isFull(*queue)){
+          printf("hàng đợi rỗng \n");
+          return;
+     }
+     if(queue->front == -1){
+          queue->front == queue->rear ==0;
+     }
+     else{
+          queue->rear= (queue->rear + 1) % queue->size;
+     }
+     queue->items[queue->rear]= value;
+ }
+ ```
+ 3. Hàm xóa phần tử 
+ ```c
+ int dequeue(Queue *queue ){
+ if(queue_isEmpty(*queue)){
+     printf("hàng đợi rỗng\n");
+     return -1;
+    }
+    int dequeue_value =queue->items[queue->front];
+    if(queue->front == queue->rear){
+     queue->front = queue->rear = -1;
+    }
+    else{
+     queue->front = (queue->front + 1) % queue->size; 
+    }
+    return dequeue_value;
+ }
+ ```
+ </details>
