@@ -1233,7 +1233,7 @@ void test(int arr[], int size){
 </details>
 
 <details>
-<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">KIỂU DỮ LIỆU TÙY CHỈNH</summary>
+<summary><img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Release.svg" width="50" height="25">STRUCT - UNION</summary>
 
 ## KIỂU DỮ LIỆU TÙY CHỈNH 
  **<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Wiki.svg" 
@@ -1329,6 +1329,51 @@ union R {
      char b ;
 }; // size =4
 ```
+_<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Discussions.svg" 
+     width="50" 
+     height="25" 
+     style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(30deg) brightness(80%) contrast(60%);">Câu hỏi ôn tập kiến thức_
+1. Tại sao kích thước struct thường lớn hơn tổng kích thước các thành phần?
+- Nguyên nhân do **HIỆU ỨNG CĂN CHỈNH BỘ NHỚ** và **CƠ CHẾ PADDING TỰ ĐỘNG**
+- Khi compiler xử lý struct , nó sẽ thêm các byte padding giữa các thành phần để đảm bảo hiệu ứng căn chỉnh 
+> công thức : kích thước struct = tổng kích thước thành phần + tổng padding
+2. Vì sao đôi khi union hữu ích hơn struct trong lập trình nhúng?
+Dưới đây là các nguyên nhân :
+- ưu thế trong việc tiết kiệm bộ nhớ dứa trên cơ chế chia sẻ vùng nhớ
+- Linh hoạt trong việc truy xuất dữ liệu
+ kỹ thuật type punning cho phép truy cập cùng một vùng nhớ dưới nhiều kiểu dữ liệu khác nhau mà không cần chuyển đổi tường minh 
+ ```c
+ union Converter{
+     uint32_t packet; //4bytes
+     struct {
+          uint8_t byte1; // LSB 
+          uint8_t byte2;
+          uint8_t byte3;
+          uint8_t byte4;//MSB
+     }bytes;
+ };
+ ```
+ > cùng vùng nhớ packet và bytes chia sẻ chung 4 bytes bộ nhớ 
+
+ với việc đặt giá trị 0xA1B2C3D4
+ | Địa chỉ       | giá trị hex     | thành phần       |
+|-------------|-------------|-------------|
+| 0x0000   | D4   | byte 1-LSB BYTE THẤP NHẤT  |
+| 0x0001   | C3   | byte 2  |
+|0x0002|B2|byte 3|
+|0x0003|A1|byte 4 - MSB BYTE CAO NHẤT|
+
+ Truy xuất
+```c
+union Converter conv
+conv.packet = 0xA1B2C3D4;
+printf("byte1: 0x%X\n",conv.bytes.byte1); //0xD4
+printf("byte4: 0x%X\n",conv.bytes.byte4); //0xA1
+```
+3. Khi nào nên sử dụng union thay vì struct?
+- Khi làm việc với bộ nhớ hạn chế 
+- Khi cần tối ưu hiệu suất đường truyền
+- Khi cần xử lý dữ liệu đa dạng không đồng thời ( int , char ...)
 </details>
 
 <details>
@@ -1913,3 +1958,5 @@ return ((queue.rear + 1) % queue.size) == queue.front;
  }
  ```
  </details>
+
+ # MAKEFILE
