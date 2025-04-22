@@ -1564,7 +1564,7 @@ typedef struct Node{
 Node* head =NULL;
 ```
 ***Các thao tác cơ bản***
-- Thêm nút : có 2 vị trí cơ bản để thêm nút mới
+- Thêm nút : có 3 vị trí cơ bản để thêm nút mới
 -- Thêm vào đầu danh sách
 _ví dụ minh họa_
 ```c
@@ -1606,6 +1606,40 @@ void insert (Node** head, int data){
      last->new = newNode;
 }
 ```
+-- Thêm vào vị trí bất kì 
+```c
+void insertAtPosition(int data, int pos){
+     if(pos<0){
+          printf("vị trí không hợp lệ\n");
+          return 0;
+     }
+     ode* newNode =(Node*)malloc(sizeof(Node));
+     if(newNode == NULL){
+     printf("Lỗi cấp phát bộ nhớ");
+     return;
+     }
+     newNode->data=data;
+     if(pos==0){ // nếu danh sách rỗng 
+     newNode->next=head;
+     head = newNode;
+     return;
+     }
+     // di chuyển đến node trước vị trí chèn 
+     Node* current =head;
+     for(int i = 0;current != NULL && i<pos -1 ; i++){ // điều kiện đã đảm bảo không duyệt quá cuối danh sách
+          current = current->next; // di chuyển con trỏ sang node kế tiếp
+          // nếu duyệt đến cuối danh sách nhưng nếu duyệt thêm lầm nữa thì current= NULL
+     }
+     if(current == NULL){
+          printf("Vị trí vượt quá độ dài danh sách");
+          free(newNode);
+          return;
+     }
+     newNode->next = current ->next; // liên kết newNode với current 
+     current->next =newNode; // cập nhật current trỏ đến newNode
+
+}
+```
 -- Xóa nút 
 ```c
 void deleteNode(Node** head , int key){
@@ -1630,13 +1664,91 @@ void deleteNode(Node** head , int key){
     free(temp);
 }
 ```
+-- Đọc đầu danh sách
+```c
+int getHead(){
+     if (head == NULL) {
+        printf("Danh sách rỗng!\n");
+        return -1; // Giá trị mặc định cho lỗi
+     }
+     return head->data;
+     //head là con trỏ trỏ đến node đầu tiên của danh sách
+     //head->data chính là giá trị data của node đầu tiên đó
+}
+```
+-- Đọc cuối danh sách
+```c
+int getEnd(){
+     if (head == NULL) {
+        printf("Danh sách rỗng!\n");
+        return -1;
+    }
+    Node* current = head;
+    while (current->next != NULL) { // duyệt đến trước NULL thì dừng lại
+        current = current->next;
+    }
+    return current->data;
+}
+```
+-- Đọc ở vị trí bất kì 
+```c
+int getAtPosition(int pos) {
+    if (head == NULL || pos < 0) {
+        printf("Danh sách rỗng hoặc vị trí không hợp lệ!\n");
+        return -1;
+    }
+
+    Node* current = head;
+    for (int i = 0; current != NULL && i < pos; i++) {
+        current = current->next;
+    }
+
+    if (current == NULL) {
+        printf("Vị trí vượt quá độ dài danh sách!\n");
+        return -1;
+    }
+
+    return current->data;
+}
+```
+-- Đếm số node 
+```c
+int countNode(){
+     int count =0;
+     Node* current = head ;
+     while(current == NULL){
+          count++;
+          current = current -> next;
+     }
+     return count ;
+}
+```
+-- Kiểm tra danh sách rỗng 
+```c
+int isEmpty(){
+     return head = NULL;
+}
+```
+-- Xóa toàn bộ danh sách 
+```c
+void deleteALL(){
+     Node* current = head; // con trỏ current trỏ đến node đầu tiên 
+Node* next; //con trỏ tạm lưu vị trí kế tiếp 
+while (current != NULL){
+     next = current->next; // lưu địa chỉ node kế tiếp 
+     free(current);// giải phóng node hiện tại 
+     current = next ; // di chuyển đến node kế tiếp
+}
+   head=NULL;
+}
+```
 -- Duyệt danh sách
 ```c
 void Display(Node* head){
      Node* current=head;
      while(current!= NULL){
           printf("%d", current->data);
-          current=current->next;
+          current= current->next;
      }
      printf("NULL");
 }
@@ -1906,11 +2018,14 @@ bool queue_isFull(Queue queue){
      width="50" 
      height="25" 
      style="filter: invert(41%) sepia(67%) saturate(463%) hue-rotate(72deg) brightness(97%) contrast(94%);">Kỹ thuật**: sử dụng phép modulo(%) tạo hiệu ứng vòng
+
  ```c
  queue->rear =(queue->rear + 1) % queue->size;
  queue->front =(queue->front + 1) % queue->size;
  ```
+
  > cho phép rear/front nhảy về 0 khi đạt giá trị max
+
 
  ***<img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/octicons/Repository.svg" 
      width="50" 
@@ -1959,4 +2074,21 @@ return ((queue.rear + 1) % queue.size) == queue.front;
  ```
  </details>
 
- # MAKEFILE
+# JSON
+***Khái niệm***:JSON(Javascript Object Notation) là một định dạng dữ liệu dựa trên văn bản 
+_Điểm quan trọng:JSON là một định dạng nhẹ , dễ đọc cho con người , dễ phân tích cho máy tính_
+ Cấu trúc chuỗi JSON:
+ - Đối tượng (Object): là tập hợp các cặp key- value được bao quanh bởi dấu ngoặc nhọn {}. Mỗi key phải là một chuỗi trong dấu ngoặc kép "" và các cặp key - value được phân tách bằng dấu phẩy ,
+ - Mảng : là danh sách các giá trị được sắp xếp theo thứ tự và được bao quanh bởi dấu ngoặc vuông[] . Các phần tử trong mảng được phân tách bằng dấu phẩy ,
+  Các kiểu giá trị JSON
+
+  | Kiểu giá trị       | ghi chú      | ví dụ|
+|-------------|-------------|----|
+|chuỗi (string)  | được đặt trong dấu ngoặc kép ""   | "ho_ten" : "Nguyễn Văn A",|
+| Số(number)   | có thể là số nguyên hoặc số thực   |"nhiet_do" : 27, |
+|Boolean|true hoặc false|"hoat_dong" : false,|
+|null|biểu thị giá trị rỗng|"PMH" : null,|
+|đối tượng(object)|tập hợp các cặp key - value|
+|mảng (array)|danh sách các giá trị có thứ tự|
+
+
