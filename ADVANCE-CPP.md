@@ -5,4 +5,9 @@
 - Lớp (class) là một "bản thiết kế" hay "khuôn mẫu" định nghĩa các thuộc tính và phương thức chung cho một nhóm đối tượng 
 - Đối tượng (object) là một thực thể cụ thể được tạo ra từ lớp. Mỗi đối tượng có thuộc tính và phương thức riêng 
 
+![Minh họa Class và Object](ADVANCE-C-/ADVANCE-C-/image/class.png)
+
+![Minh họa Class và Object](../image/class.png)
+
+![Minh họa Class và Object](image/class.jpg)
 
